@@ -1,0 +1,14 @@
+Faça um programa em Python que simule o funcionamento de uma calculadora simples, que faz as operações básicas para dois valores inteiros. O programa deve apresentar ao usuário o menu de opções abaixo e perguntar que opção ele deseja executar, realizando a operação escolhida, além de exibir o resultado. Escreva uma mensagem de erro se a opção for inválida. 
+
+Escolha a opção:
+
+1- Soma 
+
+2- Subtração
+
+3- Multiplicação
+
+4- Divisão
+
+5- Sair
+

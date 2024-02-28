@@ -1,0 +1,7 @@
+Faça um algoritmo que leia o valor e representando a quantidade de horas, de minutos e de segundos e transforme tudo para segundo. 
+
+Exemplo 
+Quantidade em horas 3 horas
+Quantidade em minutos  2 minutos
+Quantidade em segundos 7 segundos
+Resultado = 10927 segundos

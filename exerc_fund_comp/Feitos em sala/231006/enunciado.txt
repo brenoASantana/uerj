@@ -1,0 +1,2 @@
+Elabore um programa que calcule e imprima o valor de xn. 
+Considere que n deve ser um inteiro maior do que 1 e  x deve ser um inteiro maior ou igual a 1.

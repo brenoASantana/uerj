@@ -1,0 +1,2 @@
+Faça um programa que leia um número inteiro positivo e informe se o número é perfeito. Para isso, você deve desenvolver uma função que verifica se o número recebido por parâmetro é ou não perfeito.
+Obs.: Um número n é considerado perfeito se a soma dos seus divisores positivos próprios (exceto o próprio n) for igual a n.
