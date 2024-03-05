@@ -1,4 +1,4 @@
-// Faça um programa em C que leia três números inteiros distintos e os coloque em ordem crescente.
+// Faca um programa em C que leia tres numeros inteiros distintos e os coloque em ordem crescente.
 #include <stdio.h>
 
 int main()
@@ -43,6 +43,6 @@ int main()
         }
     }
     printf("%d, %d, %d", n2, n1, n3);
-    
+
     return 0;
 }

@@ -1,7 +1,17 @@
-// Faça um programa em C que leia um número N, que indique quantos números inteiros devem ser lidos.
-// Para cada número lido, apresente uma relação contendo o valor e o fatorial desse valor.
+// Modifique o exercicio anterior, sobre o fatorial, definindo uma
+// funcao para o calculo do fatorial e fazendo uso dessa funcao
+// para a solucao do exercicio
 
 #include <stdio.h>
+int fatorial(int num)
+{
+    int fat = 1;
+    for (int i = num; i > 0; i--)
+    {
+        fat *= i;
+    };
+    return fat;
+}
 
 int main()
 {
@@ -14,18 +24,13 @@ int main()
 
     for (int i = 0; i < quant; i++)
     {
-        int fat = 1;
         do
         {
             printf("\nInforme o numero que deseja saber o fatorial: ");
             scanf("%d", &num);
         } while (num <= 0);
 
-        for (int j = num; j > 0; j--)
-        {
-            fat *= j;
-        };
-        printf("O fatorial de %d e %d\n", num, fat);
+        printf("O fatorial de %d e %d\n", num, fatorial(num));
     };
 
     return 0;
