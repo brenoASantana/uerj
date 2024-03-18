@@ -1,15 +1,20 @@
+// Escreva um programa em C para o cadastramento de compromissos. Seu programa deve definir um vetor de registros, conforme os seguintes tipos de dados:
+//     - Horário: composto de hora, minutos e segundos.
+//     - Data: composto de dia, mês e ano.
+//     - Compromisso: composto de uma data, horário e um texto que descreve o compromisso.
+// O programa deve permitir que o usuário agende os compromissos de acordo com sua vontade ou até atingir o limite de 20 compromissos.
+// Ao final, o programa deve exibir os compromissos cadastrados.
+
 #include <stdio.h>
 #define lim 20
 
 typedef struct horario
 {
-
     int h, m, s;
 } horario;
 
 typedef struct data
 {
-
     int d, m, a;
 } data;
 
@@ -18,41 +23,50 @@ typedef struct compromisso
     horario horario;
     data data;
     char descricao[50];
-
 } compromisso;
 
 int main()
 {
-    horario horario[lim];
-    data data[lim];
-    compromisso compromisso[lim];
+    horario listaHorarios[lim];
+    data listaDatas[lim];
+    compromisso compromissos[lim];
 
     int op = 0;
     int i;
-    while (op == 0)
+    int numCompromissos = 0; // Variável para rastrear o número atual de compromissos
+
+    while (op == 0 && numCompromissos < lim)
     {
         for (i = 0; i < lim; i++)
         {
             printf("\nInforme a hora do compromisso: ");
-            scanf("%d", &horario[i].h);
+            scanf("%d", &listaHorarios[numCompromissos].h);
             printf("\nInforme o minuto do compromisso: ");
-            scanf("%d", &horario[i].m);
+            scanf("%d", &listaHorarios[numCompromissos].m);
             printf("\nInforme o segundo do compromisso: ");
-            scanf("%d", &horario[i].s);
+            scanf("%d", &listaHorarios[numCompromissos].s);
 
             printf("\nInforme o dia do compromisso: ");
-            scanf("%d", &data[i].d);
+            scanf("%d", &listaDatas[numCompromissos].d);
             printf("\nInforme o mes do compromisso: ");
-            scanf("%d", &data[i].m);
+            scanf("%d", &listaDatas[numCompromissos].m);
             printf("\nInforme o ano do compromisso: ");
-            scanf("%d", &data[i].a);
+            scanf("%d", &listaDatas[numCompromissos].a);
 
-            compromisso[i].horario = horario[i];
-            compromisso[i].data = data[i];
+            compromissos[numCompromissos].horario = listaHorarios[numCompromissos];
+            compromissos[numCompromissos].data = listaDatas[numCompromissos];
 
             printf("\nDescreva o compromisso: ");
             fflush(stdin);
-            gets(compromisso[i].descricao);
+            fgets(compromissos[numCompromissos].descricao, 50, stdin);
+
+            numCompromissos++; // Incrementa o número de compromissos cadastrados
+
+            if (numCompromissos >= lim)
+            {
+                printf("\nLimite de compromissos atingido.\n");
+                break;
+            }
 
             printf("\nDeseja continuar? 0 - Sim | 1 - Nao: ");
             scanf("%d", &op);
@@ -61,11 +75,11 @@ int main()
         }
     }
 
-    for (i = 0; i < lim; i++)
+    for (i = 0; i < numCompromissos; i++)
     {
-        printf("%d", compromisso[i].horario);
-        printf("%d", compromisso[i].data);
-        puts(compromisso[i].descricao);
+        printf("%02d:%02d:%02d ", compromissos[i].horario.h, compromissos[i].horario.m, compromissos[i].horario.s);
+        printf("%02d/%02d/%04d ", compromissos[i].data.d, compromissos[i].data.m, compromissos[i].data.a);
+        printf("%s\n", compromissos[i].descricao);
     }
 
     return 0;
