@@ -2,7 +2,7 @@
 
 int main()
 {
-    int op, turn, sum, sumPar, turnPar, mediaPar = 0;
+    int op = 0, turn = 0, sum = 0, sumPar = 0, turnPar = 0, mediaPar = 0;
     int n;
 
     while (op == 0)
@@ -24,7 +24,11 @@ int main()
             turn++;
         }
     }
-    mediaPar = sumPar / turnPar;
+
+    if (turnPar != 0) // Adicione uma verificação para evitar a divisão por zero
+    {
+        mediaPar = sumPar / turnPar;
+    }
 
     printf("\nSoma: %d\n", sum);
     printf("Media dos pares: %d\n", mediaPar);
