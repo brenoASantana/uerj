@@ -1,16 +1,11 @@
 #include <stdio.h>
 
-int multiplicar(float primeiroFator, float segundoFator)
-{   
-    if
-    return multiplicar();
+int multiplicar(int primeiroFator, int segundoFator)
+{
+    if (segundoFator == 1)
+        return primeiroFator;
 
-    float produto = 0.0;
-    for (int i = 0; i < segundoFator; i++)
-    {
-        produto += primeiroFator;
-    }
-    return produto;
+    return multiplicar(primeiroFator, segundoFator - 1) + primeiroFator;
 }
 
 int main()
@@ -29,7 +24,7 @@ int main()
         scanf("%d", &b);
     } while (b < 0);
 
-    printf("znResultado : %.2f", multiplicar(a, b));
+    printf("\nResultado : %d", multiplicar(a, b));
 
     return 0;
 }
