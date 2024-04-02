@@ -5,6 +5,14 @@
 
 int main()
 {
+    float n;
+    float *p_n;
 
+    p_n = &n;
+
+    printf("Digite um numero real: ");
+    scanf("%f", p_n);
+
+    printf("O numero digitado foi: %.2f\n", n);
     return 0;
 }
