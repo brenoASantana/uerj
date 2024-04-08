@@ -15,10 +15,11 @@ int main()
     printf("Escreva uma palavra:\n");
     fgets(palavra, stdin);
 
-    int r = isPalindromo(&palavra);
-    if (r == 1)
+    if (isPalindromo(&palavra))
         printf("Eh Palindromo!");
     else
         printf("Nao eh Palindromo!");
     return 0;
 }
+
+    
