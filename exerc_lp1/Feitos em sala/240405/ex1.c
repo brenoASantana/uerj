@@ -15,12 +15,8 @@ void troca(int *n1, int *n2)
 int main()
 {
     int n1, n2;
-
-    printf("Informe o primerio valor\n");
-    scanf("%d", &n1);
-
-    printf("Informe o segundo valor\n");
-    scanf("%d", &n2);
+    
+    n1 = 5, n2 = 10;
 
     printf("N1: %d N2: %d \n", n1, n2);
 
