@@ -1,25 +1,27 @@
-// Escreva uma funcao que verifique se uma string C) um palC-ndromo usando ponteiros.
+// Escreva uma funcao que verifique se uma string e um palindromo usando ponteiros.
 
 #include <stdio.h>
+#include <string.h>
 
-int isPalindromo(char[] * palavra)
+int isPalindromo(char *palavra)
 {
-    iReverse =
-        if () return 1; // True
-    else return 0;      // False
+    int *ini, *fim, i;
+    ;
+    for (i =0; i<strlen(palavra), i++){
+        
+    }
+
+    printf("Eh Palindromo!");
+    printf("Nao eh Palindromo!");
 }
 
 int main()
 {
-    char[] palavra;
+    char palavra[];
     printf("Escreva uma palavra:\n");
-    fgets(palavra, stdin);
+    scanf("%s", &palavra);
 
-    if (isPalindromo(&palavra))
-        printf("Eh Palindromo!");
-    else
-        printf("Nao eh Palindromo!");
+    isPalindromo(&palavra);
+
     return 0;
 }
-
-    

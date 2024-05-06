@@ -4,18 +4,18 @@
 
 void troca(int *n1, int *n2)
 {
-    printf("Trocou!\n");
-
     int m;
     m = *n1;
     *n1 = *n2;
     *n2 = m;
+
+    printf("Trocou!\n");
 }
 
 int main()
 {
     int n1, n2;
-    
+
     n1 = 5, n2 = 10;
 
     printf("N1: %d N2: %d \n", n1, n2);

@@ -23,20 +23,25 @@ int main()
 {
     int *vetor, n, i, sumPonteiro = 0, sumColchetes = 0;
 
-    printf("Informe a quantidade de inteiros a serem inseridos: ");
-    scanf("%d", &n);
+    do
+    {
+        printf("Informe a quantidade positiva de inteiros a serem inseridos: ");
+        scanf("%d", &n);
+    } while (n <= 0);
+
     vetor = (int *)malloc(n * sizeof(int));
+
+    if (vetor == NULL)
+    {
+        printf("\nVetor comprometido!");
+        return 1;
+    }
 
     // loop para inserir os inteiros no vetor
     for (i = 0; i < n; i++)
     {
         printf("\nInforme o inteiro %d: ", (i + 1));
         scanf("%d", &vetor[i]);
-    }
-
-    // loop para imprimir a soma por ponteiro dos inteiros;
-    for (i = 0; i < n; i++)
-    {
         sumColchetes += vetor[i];
     }
 
