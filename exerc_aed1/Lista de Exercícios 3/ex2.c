@@ -1,34 +1,65 @@
 #include <stdio.h>
-#define MAX 20
 
-int buscaOrd(int chave, int vetor[])
+#define TAMANHO_VETOR 20
+
+// Função para preencher o vetor com valores inteiros de forma ordenada
+void preencherVetorOrdenado(int vetor[])
 {
-    int i;
-    for (i = 0; i < MAX; i++)
+    printf("Digite %d valores inteiros em ordem crescente:\n", TAMANHO_VETOR);
+    for (int i = 0; i < TAMANHO_VETOR; i++)
     {
-        if(vetor[i] < chave){
-        if (vetor[i] == chave)
-            return i;
-            }
+        scanf("%d", &vetor[i]);
     }
-    // Se nao achar, retorna -1 que representa que o valor nao esta no vetor
-    return -1;
+}
+
+// Função para realizar busca binária no vetor ordenado
+int buscaBinaria(int vetor[], int tamanho, int valor)
+{
+    int inicio = 0;
+    int fim = tamanho - 1;
+    while (inicio <= fim)
+    {
+        int meio = (inicio + fim) / 2;
+        if (vetor[meio] == valor)
+        {
+            return meio; // Retorna a posição onde o valor foi encontrado
+        }
+        else if (vetor[meio] < valor)
+        {
+            inicio = meio + 1;
+        }
+        else
+        {
+            fim = meio - 1;
+        }
+    }
+    return -1; // Retorna -1 se o valor não foi encontrado
 }
 
 int main()
 {
-    int chave;
-    int vetor[MAX] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20};
+    int vetor[TAMANHO_VETOR];
+    int valorBusca, posicao;
 
-    printf("Informe o valor a ser procurado:");
-    scanf("%d", &chave);
+    // Preencher o vetor com valores inteiros em ordem crescente
+    preencherVetorOrdenado(vetor);
 
-    int result = buscaOrd(chave, vetor);
+    // Pedir ao usuário o valor a ser buscado
+    printf("\nDigite o valor a ser buscado: ");
+    scanf("%d", &valorBusca);
 
-    if (result == -1)
-        printf("\n Valor nao encontrado.");
+    // Realizar busca binária
+    posicao = buscaBinaria(vetor, TAMANHO_VETOR, valorBusca);
+
+    // Verificar se o valor foi encontrado
+    if (posicao != -1)
+    {
+        printf("\nO valor %d foi encontrado na posição %d do vetor.\n", valorBusca, posicao);
+    }
     else
-        printf("Valor na posicao %d", result + 1);
+    {
+        printf("\nO valor %d não foi encontrado no vetor.\n", valorBusca);
+    }
 
     return 0;
 }

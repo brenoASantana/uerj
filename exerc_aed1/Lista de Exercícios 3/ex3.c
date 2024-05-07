@@ -1,34 +1,49 @@
 #include <stdio.h>
-#define MAX 20
 
-int buscaBin(int chave, int vetor[])
+// Função recursiva para busca binária em um vetor ordenado
+int buscaBinariaRecursiva(int vetor[], int inicio, int fim, int valor)
 {
-    int i;
-    for (i = 0; i < MAX; i++)
+    if (inicio <= fim)
     {
-        if(vetor[i] < chave){
-        if (vetor[i] == chave)
-            return i;
-            }
+        int meio = (inicio + fim) / 2;
+        if (vetor[meio] == valor)
+        {
+            return meio; // Retorna a posição onde o valor foi encontrado
+        }
+        else if (vetor[meio] < valor)
+        {
+            return buscaBinariaRecursiva(vetor, meio + 1, fim, valor);
+        }
+        else
+        {
+            return buscaBinariaRecursiva(vetor, inicio, meio - 1, valor);
+        }
     }
-    // Se nao achar, retorna -1 que representa que o valor nao esta no vetor
-    return -1;
+    return -1; // Retorna -1 se o valor não foi encontrado
 }
 
 int main()
 {
-    int chave;
-    int vetor[MAX] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20};
+    int vetor[] = {1, 3, 5, 7, 9, 11, 13, 15, 17, 19, 21, 23, 25, 27, 29, 31, 33, 35, 37, 39};
+    int tamanho = sizeof(vetor) / sizeof(vetor[0]);
+    int valorBusca, posicao;
 
-    printf("Informe o valor a ser procurado:");
-    scanf("%d", &chave);
+    // Pedir ao usuário o valor a ser buscado
+    printf("Digite o valor a ser buscado: ");
+    scanf("%d", &valorBusca);
 
-    int result = buscaSeq(chave, vetor);
+    // Realizar busca binária recursiva
+    posicao = buscaBinariaRecursiva(vetor, 0, tamanho - 1, valorBusca);
 
-    if (result == -1)
-        printf("\n Valor nao encontrado.");
+    // Verificar se o valor foi encontrado
+    if (posicao != -1)
+    {
+        printf("\nO valor %d foi encontrado na posição %d do vetor.\n", valorBusca, posicao);
+    }
     else
-        printf("Valor na posicao %d", result + 1);
+    {
+        printf("\nO valor %d não foi encontrado no vetor.\n", valorBusca);
+    }
 
     return 0;
 }

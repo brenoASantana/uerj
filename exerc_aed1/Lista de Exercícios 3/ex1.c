@@ -1,32 +1,54 @@
 #include <stdio.h>
-#define MAX 20
 
-int buscaSeq(int chave, int vetor[])
+#define TAMANHO_VETOR 20
+
+// Função para preencher o vetor com valores inteiros
+void preencherVetor(int vetor[])
 {
-    int i;
-    for (i = 0; i < MAX; i++)
+    printf("Digite %d valores inteiros:\n", TAMANHO_VETOR);
+    for (int i = 0; i < TAMANHO_VETOR; i++)
     {
-        if (vetor[i] == chave)
-            return i;
+        scanf("%d", &vetor[i]);
     }
-    // Se nao achar, retorna -1 que representa que o valor nao esta no vetor
-    return -1;
+}
+
+// Função para realizar busca sequencial no vetor
+int buscaSequencial(int vetor[], int tamanho, int valor)
+{
+    for (int i = 0; i < tamanho; i++)
+    {
+        if (vetor[i] == valor)
+        {
+            return i; // Retorna a posição onde o valor foi encontrado
+        }
+    }
+    return -1; // Retorna -1 se o valor não foi encontrado
 }
 
 int main()
 {
-    int chave;
-    int vetor[MAX] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11,12,13,14,15,16,17,18,19,20};
+    int vetor[TAMANHO_VETOR];
+    int valorBusca, posicao;
 
-    printf("Informe o valor a ser procurado:");
-    scanf("%d", &chave);
+    // Preencher o vetor com valores inteiros
+    preencherVetor(vetor);
 
-    int result = buscaSeq(chave, vetor);
+    // Pedir ao usuário o valor a ser buscado
+    printf("\nDigite o valor a ser buscado: ");
+    scanf("%d", &valorBusca);
 
-    if (result == -1)
-        printf("\n Valor nao encontrado.");
+    // Realizar busca sequencial
+    posicao = buscaSequencial(vetor, TAMANHO_VETOR, valorBusca);
+
+    // Verificar se o valor foi encontrado
+    if (posicao != -1)
+    {
+        printf("\nO valor %d foi encontrado na posição %d do vetor.\n", valorBusca, posicao);
+    }
     else
-        printf("Valor na posicao %d", result + 1);
+    {
+        printf("\nO valor %d não foi encontrado no vetor.\n", valorBusca);
+    }
 
     return 0;
 }

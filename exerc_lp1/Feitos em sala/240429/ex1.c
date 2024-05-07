@@ -1,27 +1,29 @@
 // Ler o conteudo de um arquivo de texto e exibi lo na tela
 #include <stdio.h>
 
-int main() {
-    // Abrindo o arquivo para leitura
-    FILE *arq;
-    arq = fopen("ex1.txt", "r");
+int main()
+{
+    FILE *arquivo;
+    char linha[100];
 
-    // Verificando se o arquivo foi aberto corretamente
-    if (arq == NULL) {
-        printf("Erro ao abrir o arquivo para leitura.\n");
-        return 1; // Sair com erro
+    // Abre o arquivo em modo de leitura
+    arquivo = fopen("arquivo.txt", "r");
+
+    // Verifica se o arquivo foi aberto corretamente
+    if (arquivo == NULL)
+    {
+        printf("Erro ao abrir o arquivo.\n");
+        return 1;
     }
 
-    // Lendo e imprimindo o conteúdo do arquivo linha por linha
-    char linha[100];
-    while (fgets(linha, sizeof(linha), arq) != NULL) {
+    // Lê e exibe cada linha do arquivo
+    while (fgets(linha, sizeof(linha), arquivo) != NULL)
+    {
         printf("%s", linha);
     }
 
-    // Fechando o arquivo após a leitura
-    fclose(arq);
+    // Fecha o arquivo
+    fclose(arquivo);
 
     return 0;
 }
-
-
