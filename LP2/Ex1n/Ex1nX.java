@@ -2,7 +2,7 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
 
-public class Ex1n{
+public class Ex1nX{
     public static void main(String[] args) throws IOException {
         // Leitura do teclado
         BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
@@ -14,7 +14,7 @@ public class Ex1n{
             line = reader.readLine();
 
             // Se o usuário pressionar apenas ENTER, o programa termina
-            if (line == null) {
+            if (line.isEmpty()) {
                 System.out.println("Programa encerrado.");
                 break;
             }
