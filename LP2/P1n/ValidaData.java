@@ -16,12 +16,21 @@ public class ValidaData {
 		return ano >= (anoAtual - 120) && ano <= anoAtual;
 	}
 
-	public static boolean isDataValida(int dia, int mes, int ano) {
-		if (!isDia(dia) || !isMes(mes) || !isAno(ano))
+	public static boolean isDataValida(Integer dia, Integer mes, Integer ano) {
+		if (dia == null || mes == null || ano == null) {
 			return false;
+		}
 
-		Calendar cal = new GregorianCalendar(ano, mes - 1, dia);
-		return (cal.get(Calendar.YEAR) == ano && cal.get(Calendar.MONTH) == mes - 1
-				&& cal.get(Calendar.DAY_OF_MONTH) == dia);
+		if (!isDia(dia) || !isMes(mes) || !isAno(ano)) {
+			return false;
+		}
+
+		try {
+			Calendar cal = new GregorianCalendar(ano, mes - 1, dia);
+			return (cal.get(Calendar.YEAR) == ano && cal.get(Calendar.MONTH) == mes - 1
+					&& cal.get(Calendar.DAY_OF_MONTH) == dia);
+		} catch (IllegalArgumentException e) {
+			return false;
+		}
 	}
 }

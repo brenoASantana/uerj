@@ -15,9 +15,16 @@ public class Pessoa {
 	}
 
 	public Pessoa(String nome, String sobreNome, int dia, int mes, int ano, long numCPF, float peso, float altura) {
+		if (nome == null || sobreNome == null) {
+			throw new NullPointerException("Nome e sobrenome não podem ser nulos.");
+		}
 		this.nome = nome;
 		this.sobreNome = sobreNome;
-		this.dataNasc = new GregorianCalendar(ano, mes - 1, dia);
+		try {
+			this.dataNasc = new GregorianCalendar(ano, mes - 1, dia);
+		} catch (IllegalArgumentException e) {
+			throw new IllegalArgumentException("Data de nascimento inválida.", e);
+		}
 		this.numCPF = numCPF;
 		this.peso = peso;
 		this.altura = altura;

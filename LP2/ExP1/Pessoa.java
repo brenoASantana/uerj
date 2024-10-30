@@ -35,7 +35,7 @@ public class Pessoa {
 
 	// Getters e Setters com verificações
 	public String getNome() {
-		return nome;
+		return nome == null ? "" : nome;
 	}
 
 	public void setNome(String nome) {
@@ -43,7 +43,7 @@ public class Pessoa {
 	}
 
 	public String getSobrenome() {
-		return sobrenome;
+		return sobrenome == null ? "" : sobrenome;
 	}
 
 	public void setSobrenome(String sobrenome) {
@@ -55,7 +55,9 @@ public class Pessoa {
 	}
 
 	public void setDataNascimento(LocalDate dataNascimento) {
-		this.dataNascimento = dataNascimento;
+		if (dataNascimento != null) {
+			this.dataNascimento = dataNascimento;
+		}
 	}
 
 	public double getPeso() {
@@ -99,7 +101,7 @@ public class Pessoa {
 	}
 
 	public String getStatus() {
-		return status;
+		return status == null ? "" : status;
 	}
 
 	public void setStatus(String status) {
@@ -113,13 +115,16 @@ public class Pessoa {
 
 	// Método privado para calcular a idade
 	private int calcularIdade() {
+		if (this.dataNascimento == null) {
+			return 0;
+		}
 		return Period.between(this.dataNascimento, LocalDate.now()).getYears();
 	}
 
 	// Método toString
 	@Override
 	public String toString() {
-		return String.format("Nome: %s %s, Idade: %d, Peso: %.2f, Altura: %.2f, Gênero: %c, Status: %s", nome,
-				sobrenome, calcularIdade(), peso, altura, genero, status);
+		return String.format("Nome: %s %s, Idade: %d, Peso: %.2f, Altura: %.2f, Gênero: %c, Status: %s",
+				getNome(), getSobrenome(), calcularIdade(), peso, altura, genero, getStatus());
 	}
 }

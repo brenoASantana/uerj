@@ -6,6 +6,9 @@ public class Homem extends Pessoa {
 
 	@Override
 	public String toString() {
+		if (super.toString() == null) {
+			return "Gênero: Homem";
+		}
 		return super.toString() + ", Gênero: Homem";
 	}
 }

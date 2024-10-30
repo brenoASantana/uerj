@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.InputMismatchException;
 
 public class P1nX {
 
@@ -37,7 +38,13 @@ public class P1nX {
 
 			// Adição de mais objetos
 			System.out.print("Quantos elementos adicionais você quer criar? ");
-			int n = scanner.nextInt();
+			int n;
+			try {
+				n = scanner.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("Entrada inválida. Esperado um número inteiro.");
+				return;
+			}
 			scanner.nextLine(); // limpar o buffer
 
 			Pessoa[] pessoas = new Pessoa[n];
@@ -52,22 +59,57 @@ public class P1nX {
 				sobreNome = scanner.nextLine();
 
 				System.out.print("Digite o dia de nascimento: ");
-				dia = scanner.nextInt();
+				try {
+					dia = scanner.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("Entrada inválida. Esperado um número inteiro.");
+					scanner.nextLine(); // limpar o buffer
+					i--;
+					continue;
+				}
 
 				System.out.print("Digite o mês de nascimento: ");
-				mes = scanner.nextInt();
+				try {
+					mes = scanner.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("Entrada inválida. Esperado um número inteiro.");
+					scanner.nextLine(); // limpar o buffer
+					i--;
+					continue;
+				}
 
 				System.out.print("Digite o ano de nascimento: ");
-				ano = scanner.nextInt();
+				try {
+					ano = scanner.nextInt();
+				} catch (InputMismatchException e) {
+					System.out.println("Entrada inválida. Esperado um número inteiro.");
+					scanner.nextLine(); // limpar o buffer
+					i--;
+					continue;
+				}
 
 				System.out.print("Digite o CPF: ");
 				cpf = scanner.next();
 
 				System.out.print("Digite o peso: ");
-				peso = scanner.nextFloat();
+				try {
+					peso = scanner.nextFloat();
+				} catch (InputMismatchException e) {
+					System.out.println("Entrada inválida. Esperado um número decimal.");
+					scanner.nextLine(); // limpar o buffer
+					i--;
+					continue;
+				}
 
 				System.out.print("Digite a altura: ");
-				altura = scanner.nextFloat();
+				try {
+					altura = scanner.nextFloat();
+				} catch (InputMismatchException e) {
+					System.out.println("Entrada inválida. Esperado um número decimal.");
+					scanner.nextLine(); // limpar o buffer
+					i--;
+					continue;
+				}
 				scanner.nextLine(); // limpar o buffer
 
 				if ("homem".equalsIgnoreCase(genero)) {
@@ -96,7 +138,8 @@ public class P1nX {
 
 		} catch (Exception e) {
 			System.out.println("Erro: " + e.getMessage());
+		} finally {
+			scanner.close();
 		}
-		scanner.close();
 	}
 }
