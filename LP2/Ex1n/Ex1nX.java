@@ -4,7 +4,11 @@ import java.io.InputStreamReader;
 
 public class Ex1nX {
     public static void main(String[] args) {
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(System.in))) {
+
+        try {
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
             String line;
 
             // Loop principal que continua até que o usuário pressione apenas ENTER
@@ -18,8 +22,7 @@ public class Ex1nX {
                     break;
                 }
 
-                // Array para armazenar a contagem de cada letra (26 posições para as letras
-                // A-Z)
+                // Array para armazenar a contagem de cada letra (26 posições para as letrasA-Z)
                 int[] letterCount = new int[26];
 
                 // Percorre cada caractere da string
@@ -44,6 +47,7 @@ public class Ex1nX {
                     }
                 }
             }
+            reader.close();
         } catch (IOException e) {
             System.err.println("Erro ao ler do teclado: " + e.getMessage());
         }

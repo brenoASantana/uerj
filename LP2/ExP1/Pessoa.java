@@ -26,9 +26,9 @@ public class Pessoa {
 	public Pessoa(String nome, String sobrenome, LocalDate dataNascimento, double peso, double altura, char genero) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
-		setDataNascimento(dataNascimento);
-		setPeso(peso);
-		setAltura(altura);
+		this.dataNascimento = dataNascimento;
+		this.peso = peso;
+		this.altura = altura;
 		this.genero = genero;
 		contadorInstancias++;
 	}
