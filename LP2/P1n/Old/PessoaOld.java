@@ -1,7 +1,7 @@
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class Pessoa {
+public class PessoaOld {
 	private static int contador = 0;
 	private String nome;
 	private String sobreNome;
@@ -10,11 +10,11 @@ public class Pessoa {
 	private float peso;
 	private float altura;
 
-	public Pessoa(String nome, String sobreNome, int dia, int mes, int ano) {
+	public PessoaOld(String nome, String sobreNome, int dia, int mes, int ano) {
 		this(nome, sobreNome, dia, mes, ano, 0, 0.0f, 0.0f);
 	}
 
-	public Pessoa(String nome, String sobreNome, int dia, int mes, int ano, long numCPF, float peso, float altura) {
+	public PessoaOld(String nome, String sobreNome, int dia, int mes, int ano, long numCPF, float peso, float altura) {
 		if (nome == null || sobreNome == null) {
 			throw new NullPointerException("Nome e sobrenome não podem ser nulos.");
 		}

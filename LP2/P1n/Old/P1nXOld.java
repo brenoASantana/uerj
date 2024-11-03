@@ -1,7 +1,7 @@
 import java.util.Scanner;
 import java.util.InputMismatchException;
 
-public class P1nX {
+public class P1nXOld {
 
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
@@ -27,9 +27,9 @@ public class P1nX {
 			// Verificação e criação do objeto
 			Pessoa pessoa;
 			if ("homem".equalsIgnoreCase(genero)) {
-				pessoa = new Homem(nome, sobreNome, dia, mes, ano, ValidaCPF.toLong(cpf), peso, altura);
+				pessoa = new HomemOld(nome, sobreNome, dia, mes, ano, ValidaCPFOld.toLong(cpf), peso, altura);
 			} else if ("mulher".equalsIgnoreCase(genero)) {
-				pessoa = new Mulher(nome, sobreNome, dia, mes, ano, ValidaCPF.toLong(cpf), peso, altura);
+				pessoa = new MulherOld(nome, sobreNome, dia, mes, ano, ValidaCPFOld.toLong(cpf), peso, altura);
 			} else {
 				System.out.println("Gênero inválido.");
 				return;
@@ -113,9 +113,9 @@ public class P1nX {
 				scanner.nextLine(); // limpar o buffer
 
 				if ("homem".equalsIgnoreCase(genero)) {
-					pessoas[i] = new Homem(nome, sobreNome, dia, mes, ano, ValidaCPF.toLong(cpf), peso, altura);
+					pessoas[i] = new HomemOld(nome, sobreNome, dia, mes, ano, ValidaCPFOld.toLong(cpf), peso, altura);
 				} else if ("mulher".equalsIgnoreCase(genero)) {
-					pessoas[i] = new Mulher(nome, sobreNome, dia, mes, ano, ValidaCPF.toLong(cpf), peso, altura);
+					pessoas[i] = new MulherOld(nome, sobreNome, dia, mes, ano, ValidaCPFOld.toLong(cpf), peso, altura);
 				} else {
 					System.out.println("Gênero inválido.");
 					i--; // repetir para entrada inválida
@@ -127,9 +127,9 @@ public class P1nX {
 			for (Pessoa p : pessoas) {
 				if (p != null) {
 					System.out.println(p);
-					if (p instanceof Homem)
+					if (p instanceof HomemOld)
 						homens++;
-					if (p instanceof Mulher)
+					if (p instanceof MulherOld)
 						mulheres++;
 				}
 			}

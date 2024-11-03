@@ -1,7 +1,7 @@
 import java.util.regex.Pattern;
 import java.util.InputMismatchException;
 
-public class ValidaCPF {
+public class ValidaCPFOld {
 
     public static boolean isCPF(String CPF) {
         // considera-se erro CPFs formados por uma sequência de números iguais
