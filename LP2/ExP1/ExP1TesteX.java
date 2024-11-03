@@ -102,6 +102,7 @@ public class ExP1TesteX {
 			System.out.println("\n------------------------------------------------\n");
 		}
 		scanner.close();
+		System.out.printf("Quantidade de instancias de pessoas criadas: %d", Pessoa.getQuantInstancia());
 	}
 
 	private static Genero selecionarGenero(Scanner scanner) {
