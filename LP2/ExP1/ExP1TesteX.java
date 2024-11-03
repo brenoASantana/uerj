@@ -1,10 +1,12 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 import java.util.Scanner;
 
 public class ExP1TesteX {
 	public static void main(String[] args) {
 		Scanner scanner = new Scanner(System.in);
+		scanner.useLocale(Locale.US); // Define o scanner para aceitar ponto como separador decimal
 
 		int numeroPessoa = Integer.parseInt(args[0]);
 		Pessoa[] pessoa = new Pessoa[numeroPessoa];
@@ -12,7 +14,7 @@ public class ExP1TesteX {
 		// Criação das instâncias de Pessoa
 		for (int i = 0; i < numeroPessoa; i++) {
 			System.out.printf(
-					"Deseja informar quais dados da Pessoa nº %d?\n 1 - Todos\n 2 - Somente nome e sobrenome\n 3 - Nenhum\n",
+					"Deseja informar quais dados da Pessoa nº %d?\n 1 - Todos\n 2 - Somente primeiro nome \n 3 - Nenhum\n",
 					i + 1);
 			int op = scanner.nextInt();
 			scanner.nextLine(); // Consumir nova linha
