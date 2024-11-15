@@ -8,7 +8,7 @@ public class P1nX {
 
 		// Tratamento dos argumentos da linha de comando
 		try {
-			if (args.length < 9) {	
+			if (args.length < 9) {
 				throw new IllegalArgumentException("Número insuficiente de argumentos.");
 			}
 
@@ -18,7 +18,7 @@ public class P1nX {
 			int dia = Integer.parseInt(args[3].trim());
 			int mes = Integer.parseInt(args[4].trim());
 			int ano = Integer.parseInt(args[5].trim());
-			String cpfStr = args[6].trim();
+			String cpfStr = ValidaCPF.convertCPF(args[6].trim());
 			float peso = Float.parseFloat(args[7].trim());
 			float altura = Float.parseFloat(args[8].trim());
 
@@ -47,6 +47,8 @@ public class P1nX {
 			System.out.println(
 					"Uso correto: java P1nX <genero> <nome> <sobrenome> <dia> <mes> <ano> <CPF> <peso> <altura>");
 			System.out.println("Gênero: 'M' para Masculino ou 'F' para Feminino.");
+		} finally {
+			scanner.close();
 		}
 
 		// Entrada de dados para o array
@@ -120,6 +122,8 @@ public class P1nX {
 			} catch (Exception e) {
 				System.out.println("Erro: " + e.getMessage());
 				System.out.println("Por favor, tente novamente.");
+			} finally {
+				scanner.close();
 			}
 		}
 
@@ -148,6 +152,5 @@ public class P1nX {
 		System.out.println("Total de homens: " + totalHomens);
 		System.out.println("Total de mulheres: " + totalMulheres);
 
-		scanner.close();
 	}
 }
