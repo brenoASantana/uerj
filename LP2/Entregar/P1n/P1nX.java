@@ -8,8 +8,7 @@ public class P1nX {
 
 		// Tratamento dos argumentos da linha de comando
 		try {
-			if (args.length < 9) {
-				scanner.close();				
+			if (args.length < 9) {	
 				throw new IllegalArgumentException("Número insuficiente de argumentos.");
 			}
 
@@ -24,12 +23,10 @@ public class P1nX {
 			float altura = Float.parseFloat(args[8].trim());
 
 			if (!ValidaData.isDataValida(dia, mes, ano)) {
-				scanner.close();
 				throw new IllegalArgumentException("Data de nascimento inválida.");
 			}
 
 			if (!ValidaCPF.isCPF(cpfStr)) {
-				scanner.close();
 				throw new IllegalArgumentException("CPF inválido.");
 			}
 
@@ -40,7 +37,6 @@ public class P1nX {
 			} else if (genero == 'F') {
 				primeiraPessoa = new Mulher(nome, sobrenome, dia, mes, ano, cpf, peso, altura);
 			} else {
-				scanner.close();
 				throw new IllegalArgumentException("Gênero inválido. Use 'M' para masculino ou 'F' para feminino.");
 			}
 
