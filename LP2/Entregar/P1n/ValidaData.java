@@ -1,25 +1,28 @@
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 public class ValidaData {
 
-	private static final Map<String, Integer> mesesPorNome;
+	private static final HashSet<String> meses;
 
+	// Deixando esse valores estáticos pois podem ser usados sem a criação de uma
+	// instancia
 	static {
-		mesesPorNome = new HashMap<>();
-		mesesPorNome.put("janeiro", 1);
-		mesesPorNome.put("fevereiro", 2);
-		mesesPorNome.put("marco", 3);
-		mesesPorNome.put("abril", 4);
-		mesesPorNome.put("maio", 5);
-		mesesPorNome.put("junho", 6);
-		mesesPorNome.put("julho", 7);
-		mesesPorNome.put("agosto", 8);
-		mesesPorNome.put("setembro", 9);
-		mesesPorNome.put("outubro", 10);
-		mesesPorNome.put("novembro", 11);
-		mesesPorNome.put("dezembro", 12);
+		meses = new HashSet<>();
+		meses.add("janeiro");
+		meses.add("fevereiro");
+		meses.add("marco");
+		meses.add("abril");
+		meses.add("maio");
+		meses.add("junho");
+		meses.add("julho");
+		meses.add("agosto");
+		meses.add("setembro");
+		meses.add("outubro");
+		meses.add("novembro");
+		meses.add("dezembro");
 	}
 
 	public static boolean isDia(int dia) {
@@ -31,7 +34,7 @@ public class ValidaData {
 	}
 
 	public static boolean isMes(String mes) {
-		return mesesPorNome.containsKey(mes.toLowerCase());
+		return meses.contains(mes.toLowerCase());
 	}
 
 	public static boolean isAno(int ano) {
@@ -40,12 +43,16 @@ public class ValidaData {
 	}
 
 	public static boolean isDataValida(int dia, int mes, int ano) {
-		// Verifica se o dia é válido para o mês e ano informados
+		// Verifica se o dia é válido para o mês e ano informados.
 		try {
+			// Note que o mês é ajustado (mes - 1), pois os meses no GregorianCalendar são
+			// indexados a partir de 0
 			GregorianCalendar data = new GregorianCalendar(ano, mes - 1, dia);
-			return data.get(GregorianCalendar.DAY_OF_MONTH) == dia &&
-					data.get(GregorianCalendar.MONTH) == mes - 1 &&
-					data.get(GregorianCalendar.YEAR) == ano;
+
+			// Essa verificação é necessária porque o GregorianCalendar ajusta
+			// automaticamente datas inválidas
+			return data.get(GregorianCalendar.DAY_OF_MONTH) == dia && data.get(GregorianCalendar.MONTH) == mes - 1
+					&& data.get(GregorianCalendar.YEAR) == ano;
 		} catch (Exception e) {
 			return false;
 		}
