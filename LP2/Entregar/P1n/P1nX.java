@@ -47,10 +47,7 @@ public class P1nX {
 			System.out.println(
 					"Uso correto: java P1nX <genero> <nome> <sobrenome> <dia> <mes> <ano> <CPF> <peso> <altura>");
 			System.out.println("Gênero: 'M' para Masculino ou 'F' para Feminino.");
-		} finally {
-			scanner.close();
 		}
-
 		// Entrada de dados para o array
 		System.out.println("\nQuantos elementos adicionais você deseja criar?");
 		int numElementos = 0;
@@ -122,9 +119,8 @@ public class P1nX {
 			} catch (Exception e) {
 				System.out.println("Erro: " + e.getMessage());
 				System.out.println("Por favor, tente novamente.");
-			} finally {
-				scanner.close();
 			}
+
 		}
 
 		// Exibindo os dados das pessoas
@@ -146,6 +142,8 @@ public class P1nX {
 				totalMulheres++;
 			}
 		}
+
+		scanner.close();
 
 		System.out.println("\nResumo:");
 		System.out.println("Total de pessoas: " + Pessoa.numPessoas());
