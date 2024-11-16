@@ -40,7 +40,9 @@ public class Pessoa {
 	}
 
 	public void setNome(String nome) {
-		this.nome = nome;
+		if (nome != null && nome.length() > 0) {
+			this.nome = nome;
+		}
 	}
 
 	public String getSobrenome() {
@@ -48,7 +50,9 @@ public class Pessoa {
 	}
 
 	public void setSobrenome(String sobrenome) {
-		this.sobrenome = sobrenome;
+		if (sobrenome != null && sobrenome.length() > 0) {
+			this.sobrenome = sobrenome;
+		}
 	}
 
 	public GregorianCalendar getDataNascimento() {
@@ -56,7 +60,9 @@ public class Pessoa {
 	}
 
 	public void setDataNascimento(GregorianCalendar dataNascimento) {
-		this.dataNascimento = dataNascimento;
+		if (dataNascimento != null) {
+			this.dataNascimento = dataNascimento;
+		}
 	}
 
 	public long getNumCPF() {
@@ -64,7 +70,9 @@ public class Pessoa {
 	}
 
 	public void setNumCPF(long numCPF) {
-		this.numCPF = numCPF;
+		if (numCPF != 0) {
+			this.numCPF = numCPF;
+		}
 	}
 
 	public float getPeso() {
@@ -72,7 +80,9 @@ public class Pessoa {
 	}
 
 	public void setPeso(float peso) {
-		this.peso = peso;
+		if (peso > 0) {
+			this.peso = peso;
+		}
 	}
 
 	public float getAltura() {
@@ -80,7 +90,9 @@ public class Pessoa {
 	}
 
 	public void setAltura(float altura) {
-		this.altura = altura;
+		if (altura > 0) {
+			this.altura = altura;
+		}
 	}
 
 }

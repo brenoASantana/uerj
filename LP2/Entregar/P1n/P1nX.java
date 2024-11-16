@@ -20,9 +20,7 @@ public class P1nX {
 
 			char genero = args[0].trim().toUpperCase().charAt(0);
 			String nome = args[1].trim();
-
 			String sobrenome = args[2].trim();
-
 			int dia = Integer.parseInt(args[3].trim());
 			int mes = Integer.parseInt(args[4].trim());
 			int ano = Integer.parseInt(args[5].trim());
@@ -30,44 +28,13 @@ public class P1nX {
 			float peso = Float.parseFloat(args[7].trim());
 			float altura = Float.parseFloat(args[8].trim());
 
-			if (nome.contains("0") || nome.contains("1") || nome.contains("2") || nome.contains("3")
-					|| nome.contains("4") || nome.contains("5") || nome.contains("6") || nome.contains("7")
-					|| nome.contains("8") || nome.contains("9"))
-				throw new IllegalArgumentException("Nome inválido. O nome não deve conter números.");
+			validateNomeSobrenome(nome, "Nome");
+			validateNomeSobrenome(sobrenome, "Sobrenome");
 
-			if (sobrenome.contains("0") || sobrenome.contains("1") || sobrenome.contains("2") || sobrenome.contains("3")
-					|| sobrenome.contains("4") || sobrenome.contains("5") || sobrenome.contains("6")
-					|| sobrenome.contains("7") || sobrenome.contains("8") || sobrenome.contains("9"))
-				throw new IllegalArgumentException("Sobrenome inválido. O sobrenome não deve conter números.");
-
-			if (peso < 1 || peso > 635) {
-				throw new IllegalArgumentException("Peso inválido. Insira um peso possível.");
-			}
-
-			if (altura < 0.30 || altura > 2.38) {
-				throw new IllegalArgumentException("Altura inválida. Insira uma altura possível.");
-			}
-
-			if (!ValidaData.isDia(dia)) {
-				throw new IllegalArgumentException("Dia inválido. Insira um dia existente.");
-			}
-
-			if (!ValidaData.isMes(mes)) {
-				throw new IllegalArgumentException("Mês inválido. Insira um mês existente.");
-			}
-
-			if (!ValidaData.isAno(ano)) {
-				throw new IllegalArgumentException("Ano inválido. Insira um ano existente.");
-			}
-
-			if (!ValidaData.isDataValida(dia, mes, ano)) {
-				throw new IllegalArgumentException("Data de nascimento inválida.");
-			}
-
-			if (!ValidaCPF.isCPF(cpfStr)) {
-				throw new IllegalArgumentException(
-						"CPF inválido! Certifique-se de que o CPF inserido existe e utilize um dos formatos aceitos: 12345678901, 123.456.789-01 ou 123.456.789/01.");
-			}
+			validatePeso(peso);
+			validateAltura(altura);
+			validateData(dia, mes, ano);
+			validateCPF(cpfStr);
 
 			long cpf = ValidaCPF.toLong(cpfStr);
 
@@ -117,64 +84,35 @@ public class P1nX {
 					System.out.println("Digite o sobrenome:");
 					String sobrenome = scanner.nextLine().trim();
 
-					if (nome.contains("0") || nome.contains("1") || nome.contains("2") || nome.contains("3")
-							|| nome.contains("4") || nome.contains("5") || nome.contains("6") || nome.contains("7")
-							|| nome.contains("8") || nome.contains("9"))
-						throw new IllegalArgumentException("Nome inválido. O nome não deve conter números.");
-
-					if (sobrenome.contains("0") || sobrenome.contains("1") || sobrenome.contains("2")
-							|| sobrenome.contains("3") || sobrenome.contains("4") || sobrenome.contains("5")
-							|| sobrenome.contains("6") || sobrenome.contains("7") || sobrenome.contains("8")
-							|| sobrenome.contains("9"))
-						throw new IllegalArgumentException("Sobrenome inválido. O sobrenome não deve conter números.");
+					validateNomeSobrenome(nome, "Nome");
+					validateNomeSobrenome(sobrenome, "Sobrenome");
 
 					System.out.println("Digite o dia de nascimento:");
 					int dia = Integer.parseInt(scanner.nextLine().trim());
 
-					if (!ValidaData.isDia(dia)) {
-						throw new IllegalArgumentException("Dia inválido. Insira um dia existente.");
-					}
-
 					System.out.println("Escreva o mês de nascimento:");
 					int mes = ValidaData.convertMes(scanner.nextLine().trim().toLowerCase());
-
-					if (!ValidaData.isMes(mes)) {
-						throw new IllegalArgumentException("Mês inválido. Insira um mês existente.");
-					}
 
 					System.out.println("Digite o ano de nascimento:");
 					int ano = Integer.parseInt(scanner.nextLine().trim());
 
-					if (!ValidaData.isAno(ano)) {
-						throw new IllegalArgumentException("Ano inválido. Insira um ano existente.");
-					}
-
-					if (!ValidaData.isDataValida(dia, mes, ano)) {
-						throw new IllegalArgumentException("Data de nascimento inválida.");
-					}
+					validateData(dia, mes, ano);
 
 					System.out.println("Digite o CPF:");
 					String cpfStr = ValidaCPF.convertCPF(scanner.nextLine().trim());
 
-					if (!ValidaCPF.isCPF(cpfStr)) {
-						throw new IllegalArgumentException(
-								"CPF inválido! Certifique-se de que o CPF inserido é válido e utilize um dos formatos aceitos: 12345678901, 123.456.789-01 ou 123.456.789/01.");
-					}
+					validateCPF(cpfStr);
 					long cpf = ValidaCPF.toLong(cpfStr);
 
 					System.out.println("Digite o peso (kg):");
 					float peso = Float.parseFloat(scanner.nextLine().trim());
 
-					if (peso < 1 || peso > 635) {
-						throw new IllegalArgumentException("Peso inválido. Insira um peso possível.");
-					}
+					validatePeso(peso);
 
 					System.out.println("Digite a altura (m):");
 					float altura = Float.parseFloat(scanner.nextLine().trim());
 
-					if (altura < 0.30 || altura > 2.38) {
-						throw new IllegalArgumentException("Altura inválida. Insira uma altura possível.");
-					}
+					validateAltura(altura);
 
 					System.out.println("Esta pessoa é do gênero feminino ou masculino (f ou m)?");
 					char genero = scanner.nextLine().trim().toUpperCase().charAt(0);
@@ -195,12 +133,11 @@ public class P1nX {
 					System.out.println("Erro: " + e.getMessage());
 					System.out.println("Por favor, tente novamente.");
 				}
-
 			}
 
 			System.out.println("-----------------------------------------------------------");
 			// Exibindo os dados das pessoas
-			System.out.println("\nInformações inseridas::");
+			System.out.println("\nInformações inseridas:");
 			System.out.println(primeiraPessoa);
 			for (Pessoa pessoa : pessoas) {
 				if (pessoa != null) {
@@ -229,11 +166,48 @@ public class P1nX {
 			System.out.println("Total de pessoas: " + Pessoa.numPessoas());
 			System.out.println("Total de homens: " + totalHomens);
 			System.out.println("Total de mulheres: " + totalMulheres);
-
 		}
 		scanner.close();
 		System.out.println("Programa encerrado.");
-
 	}
 
+	private static void validateNomeSobrenome(String value, String fieldName) throws IllegalArgumentException {
+		if (value.chars().anyMatch(Character::isDigit)) {
+			throw new IllegalArgumentException(fieldName + " inválido. Não deve conter números.");
+		}
+	}
+
+	private static void validatePeso(float peso) throws IllegalArgumentException {
+		if (peso < 1 || peso > 635) {
+			throw new IllegalArgumentException("Peso inválido. Insira um peso possível.");
+		}
+	}
+
+	private static void validateAltura(float altura) throws IllegalArgumentException {
+		if (altura < 0.30 || altura > 2.38) {
+			throw new IllegalArgumentException("Altura inválida. Insira uma altura possível.");
+		}
+	}
+
+	private static void validateData(int dia, int mes, int ano) throws IllegalArgumentException {
+		if (!ValidaData.isDia(dia)) {
+			throw new IllegalArgumentException("Dia inválido. Insira um dia existente.");
+		}
+		if (!ValidaData.isMes(mes)) {
+			throw new IllegalArgumentException("Mês inválido. Insira um mês existente.");
+		}
+		if (!ValidaData.isAno(ano)) {
+			throw new IllegalArgumentException("Ano inválido. Insira um ano existente.");
+		}
+		if (!ValidaData.isDataValida(dia, mes, ano)) {
+			throw new IllegalArgumentException("Data de nascimento inválida.");
+		}
+	}
+
+	private static void validateCPF(String cpfStr) throws IllegalArgumentException {
+		if (!ValidaCPF.isCPF(cpfStr)) {
+			throw new IllegalArgumentException(
+					"CPF inválido! Certifique-se de que o CPF inserido é válido e utilize um dos formatos aceitos: 12345678901, 123.456.789-01 ou 123.456.789/01.");
+		}
+	}
 }
