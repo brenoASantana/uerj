@@ -26,8 +26,12 @@ public class ValidaData {
 	}
 
 	public static int convertMes(String mes) {
-		return mesesPorNome.get(mes);
+		if (mesesPorNome.get(mes) == null)
+			return -1;
+		else
+			return mesesPorNome.get(mes);
 	}
+
 	public static boolean isDia(int dia) {
 		return dia >= 1 && dia <= 31;
 	}
