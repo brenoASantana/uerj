@@ -9,12 +9,12 @@ public class P1nX {
 
 		Scanner scanner = new Scanner(System.in);
 		Pessoa primeiraPessoa = null;
-		boolean falhou = false;
+		boolean primeiroSucesso = true;
 
 		// Tratamento dos argumentos da linha de comando
 		try {
 			if (args.length < 9) {
-				falhou = true;
+				primeiroSucesso = false;
 				throw new IllegalArgumentException("Informações faltando. Por favor, preencha todos os dados.");
 			}
 
@@ -28,13 +28,13 @@ public class P1nX {
 			float peso = Float.parseFloat(args[7].trim());
 			float altura = Float.parseFloat(args[8].trim());
 
-			validateNomeSobrenome(nome, "Nome");
-			validateNomeSobrenome(sobrenome, "Sobrenome");
+			validaNome(nome, "Nome");
+			validaNome(sobrenome, "Sobrenome");
 
-			validatePeso(peso);
-			validateAltura(altura);
-			validateData(dia, mes, ano);
-			validateCPF(cpfStr);
+			validarPeso(peso);
+			validarAltura(altura);
+			validarData(dia, mes, ano);
+			validarCPF(cpfStr);
 
 			long cpf = ValidaCPF.toLong(cpfStr);
 
@@ -43,18 +43,21 @@ public class P1nX {
 			} else if (genero == 'F') {
 				primeiraPessoa = new Mulher(nome, sobrenome, dia, mes, ano, cpf, peso, altura);
 			} else {
+				primeiroSucesso = false;
 				throw new IllegalArgumentException("Gênero inválido. Use 'M' para masculino ou 'F' para feminino.");
 			}
 
 			System.out.println("Pessoa criada com sucesso:");
 			System.out.println(primeiraPessoa);
 		} catch (Exception e) {
+			primeiroSucesso = false;
 			System.out.println("Erro: " + e.getMessage());
 			System.out.println(
 					"Uso correto: java P1nX <genero> <nome> <sobrenome> <dia> <mes> <ano> <CPF> <peso> <altura>");
 			System.out.println("Gênero: 'M' para Masculino ou 'F' para Feminino.");
 		}
-		if (!falhou) {
+
+		if (primeiroSucesso) {
 			// Entrada de dados para o array
 			System.out.println("\nQuantas pessoas a mais deseja inserir?");
 			int numElementos = 0;
@@ -84,8 +87,8 @@ public class P1nX {
 					System.out.println("Digite o sobrenome:");
 					String sobrenome = scanner.nextLine().trim();
 
-					validateNomeSobrenome(nome, "Nome");
-					validateNomeSobrenome(sobrenome, "Sobrenome");
+					validaNome(nome, "Nome");
+					validaNome(sobrenome, "Sobrenome");
 
 					System.out.println("Digite o dia de nascimento:");
 					int dia = Integer.parseInt(scanner.nextLine().trim());
@@ -96,23 +99,23 @@ public class P1nX {
 					System.out.println("Digite o ano de nascimento:");
 					int ano = Integer.parseInt(scanner.nextLine().trim());
 
-					validateData(dia, mes, ano);
+					validarData(dia, mes, ano);
 
 					System.out.println("Digite o CPF:");
 					String cpfStr = ValidaCPF.convertCPF(scanner.nextLine().trim());
 
-					validateCPF(cpfStr);
+					validarCPF(cpfStr);
 					long cpf = ValidaCPF.toLong(cpfStr);
 
 					System.out.println("Digite o peso (kg):");
 					float peso = Float.parseFloat(scanner.nextLine().trim());
 
-					validatePeso(peso);
+					validarPeso(peso);
 
 					System.out.println("Digite a altura (m):");
 					float altura = Float.parseFloat(scanner.nextLine().trim());
 
-					validateAltura(altura);
+					validarAltura(altura);
 
 					System.out.println("Esta pessoa é do gênero feminino ou masculino (f ou m)?");
 					char genero = scanner.nextLine().trim().toUpperCase().charAt(0);
@@ -171,25 +174,27 @@ public class P1nX {
 		System.out.println("Programa encerrado.");
 	}
 
-	private static void validateNomeSobrenome(String value, String fieldName) throws IllegalArgumentException {
-		if (value.chars().anyMatch(Character::isDigit)) {
-			throw new IllegalArgumentException(fieldName + " inválido. Não deve conter números.");
+	private static void validaNome(String valor, String campo) throws IllegalArgumentException {
+		if (valor.contains("0") || valor.contains("1") || valor.contains("2") || valor.contains("3")
+				|| valor.contains("4") || valor.contains("5") || valor.contains("6") || valor.contains("7")
+				|| valor.contains("8") || valor.contains("9")) {
+			throw new IllegalArgumentException(campo + " inválido. Não deve conter números.");
 		}
 	}
 
-	private static void validatePeso(float peso) throws IllegalArgumentException {
+	private static void validarPeso(float peso) throws IllegalArgumentException {
 		if (peso < 1 || peso > 635) {
 			throw new IllegalArgumentException("Peso inválido. Insira um peso possível.");
 		}
 	}
 
-	private static void validateAltura(float altura) throws IllegalArgumentException {
+	private static void validarAltura(float altura) throws IllegalArgumentException {
 		if (altura < 0.30 || altura > 2.38) {
 			throw new IllegalArgumentException("Altura inválida. Insira uma altura possível.");
 		}
 	}
 
-	private static void validateData(int dia, int mes, int ano) throws IllegalArgumentException {
+	private static void validarData(int dia, int mes, int ano) throws IllegalArgumentException {
 		if (!ValidaData.isDia(dia)) {
 			throw new IllegalArgumentException("Dia inválido. Insira um dia existente.");
 		}
@@ -204,7 +209,7 @@ public class P1nX {
 		}
 	}
 
-	private static void validateCPF(String cpfStr) throws IllegalArgumentException {
+	private static void validarCPF(String cpfStr) throws IllegalArgumentException {
 		if (!ValidaCPF.isCPF(cpfStr)) {
 			throw new IllegalArgumentException(
 					"CPF inválido! Certifique-se de que o CPF inserido é válido e utilize um dos formatos aceitos: 12345678901, 123.456.789-01 ou 123.456.789/01.");
