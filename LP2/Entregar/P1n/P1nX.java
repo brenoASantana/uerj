@@ -183,7 +183,7 @@ public class P1nX {
 	}
 
 	private static void validarPeso(float peso) throws IllegalArgumentException {
-		if (peso < 1 || peso > 635) {
+		if (peso < 1.0 || peso > 635.0) {
 			throw new IllegalArgumentException("Peso inválido. Insira um peso possível.");
 		}
 	}
