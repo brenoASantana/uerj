@@ -49,7 +49,7 @@ public class P1nX {
 			System.out.println("Gênero: 'M' para Masculino ou 'F' para Feminino.");
 		}
 		// Entrada de dados para o array
-		System.out.println("\nQuantos elementos adicionais você deseja criar?");
+		System.out.println("\nQuantas pessoas a mais deseja inserir?");
 		int numElementos = 0;
 		while (true) {
 			try {
@@ -85,7 +85,7 @@ public class P1nX {
 				}
 
 				System.out.println("Escreva o mês de nascimento:");
-				int mes = ValidaData.convertMes(scanner.nextLine().trim());
+				int mes = ValidaData.convertMes(scanner.nextLine().trim().toLowerCase());
 
 				if (!ValidaData.isMes(mes)) {
 					throw new IllegalArgumentException("Mes de nascimento inválido.");
@@ -102,8 +102,9 @@ public class P1nX {
 					throw new IllegalArgumentException("Data de nascimento inválida.");
 				}
 
-				System.out.println("Digite o CPF (apenas números):");
-				String cpfStr = scanner.nextLine().trim();
+				System.out.println("Digite o CPF:");
+				String cpfStr = ValidaCPF.convertCPF(scanner.nextLine().trim());
+
 				if (!ValidaCPF.isCPF(cpfStr)) {
 					throw new IllegalArgumentException("CPF inválido.");
 				}
@@ -115,7 +116,7 @@ public class P1nX {
 				System.out.println("Digite a altura (m):");
 				float altura = Float.parseFloat(scanner.nextLine().trim());
 
-				System.out.println("Digite o gênero (M para masculino, F para feminino):");
+				System.out.println("Esta pessoa é do gênero feminino ou masculino (f ou m)?");
 				char genero = scanner.nextLine().trim().toUpperCase().charAt(0);
 
 				if (genero == 'M') {
@@ -127,6 +128,7 @@ public class P1nX {
 				}
 
 				System.out.println("Pessoa adicionada com sucesso!");
+
 				index++;
 			} catch (Exception e) {
 				System.out.println("Erro: " + e.getMessage());
@@ -135,8 +137,9 @@ public class P1nX {
 
 		}
 
+		System.out.println("-----------------------------------------------------------");
 		// Exibindo os dados das pessoas
-		System.out.println("\nPessoas cadastradas:");
+		System.out.println("\nInformações inseridas::");
 		System.out.println(primeiraPessoa);
 		for (Pessoa pessoa : pessoas) {
 			if (pessoa != null) {
@@ -147,6 +150,11 @@ public class P1nX {
 		// Contagem de Homens e Mulheres
 		int totalHomens = 0;
 		int totalMulheres = 0;
+
+		if (primeiraPessoa instanceof Homem)
+			totalHomens++;
+		else if (primeiraPessoa instanceof Mulher)
+			totalMulheres++;
 
 		for (Pessoa pessoa : pessoas) {
 			if (pessoa instanceof Homem) {
@@ -162,6 +170,7 @@ public class P1nX {
 		System.out.println("Total de pessoas: " + Pessoa.numPessoas());
 		System.out.println("Total de homens: " + totalHomens);
 		System.out.println("Total de mulheres: " + totalMulheres);
+		System.out.println("Programa encerrado.");
 
 	}
 }
