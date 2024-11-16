@@ -80,11 +80,23 @@ public class P1nX {
 				System.out.println("Digite o dia de nascimento:");
 				int dia = Integer.parseInt(scanner.nextLine().trim());
 
-				System.out.println("Digite o mês de nascimento (número entre 1 e 12):");
-				int mes = Integer.parseInt(scanner.nextLine().trim());
+				if (!ValidaData.isDia(dia)) {
+					throw new IllegalArgumentException("Dia de nascimento inválido.");
+				}
+
+				System.out.println("Escreva o mês de nascimento:");
+				int mes = ValidaData.convertMes(scanner.nextLine().trim());
+
+				if (!ValidaData.isMes(mes)) {
+					throw new IllegalArgumentException("Mes de nascimento inválido.");
+				}
 
 				System.out.println("Digite o ano de nascimento:");
 				int ano = Integer.parseInt(scanner.nextLine().trim());
+
+				if (!ValidaData.isAno(ano)) {
+					throw new IllegalArgumentException("Ano de nascimento inválido.");
+				}
 
 				if (!ValidaData.isDataValida(dia, mes, ano)) {
 					throw new IllegalArgumentException("Data de nascimento inválida.");
@@ -125,6 +137,7 @@ public class P1nX {
 
 		// Exibindo os dados das pessoas
 		System.out.println("\nPessoas cadastradas:");
+		System.out.println(primeiraPessoa);
 		for (Pessoa pessoa : pessoas) {
 			if (pessoa != null) {
 				System.out.println(pessoa);
