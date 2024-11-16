@@ -16,6 +16,9 @@ public class P1nX {
 			if (args.length < 9) {
 				primeiroSucesso = false;
 				throw new IllegalArgumentException("Informações faltando. Por favor, preencha todos os dados.");
+			} else if (args.length > 9) {
+				primeiroSucesso = false;
+				throw new IllegalArgumentException("Informações a mais. Por favor, corrija todos os dados.");
 			}
 
 			char genero = args[0].trim().toUpperCase().charAt(0);
