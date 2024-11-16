@@ -183,13 +183,13 @@ public class P1nX {
 	}
 
 	private static void validarPeso(float peso) throws IllegalArgumentException {
-		if (peso < 1.0 || peso > 635.0) {
+		if (peso < 1.0 || peso > 650.0) {
 			throw new IllegalArgumentException("Peso inválido. Insira um peso possível.");
 		}
 	}
 
 	private static void validarAltura(float altura) throws IllegalArgumentException {
-		if (altura < 0.30 || altura > 2.38) {
+		if (altura < 0.3 || altura > 2.5) {
 			throw new IllegalArgumentException("Altura inválida. Insira uma altura possível.");
 		}
 	}
