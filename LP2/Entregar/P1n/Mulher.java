@@ -11,7 +11,7 @@ public class Mulher extends Pessoa {
 
 	@Override
 	public String toString() {
-		return super.toString() + ", Gênero: Homem, Idade: " + calcularIdade();
+		return super.toString() + ", Gênero: Mulher, Idade: " + calcularIdade();
 	}
 
 	private int calcularIdade() {
