@@ -1,42 +1,41 @@
-
 public abstract class PessoaIMC extends Pessoa {
-	private float peso;
-	private float altura;
+    protected float peso;
+    protected float altura;
 
-	public PessoaIMC(String nome, String sobrenome, int dia, int mes, int ano) {
-		super(nome, sobrenome, dia, mes, ano);
-	}
+    public PessoaIMC(String nome, String sobrenome, int dia, int mes, int ano, float peso, float altura) {
+        super(nome, sobrenome, dia, mes, ano);
+        this.peso = peso;
+        this.altura = altura;
+    }
 
-	public PessoaIMC(String nome, String sobrenome, int dia, int mes, int ano, long numCPF) {
-		super(nome, sobrenome, dia, mes, ano, numCPF);
-	}
+    public float getPeso() {
+        return peso;
+    }
 
-	public float calculaIMC(float peso, float altura) {
-		return (float) (peso / Math.pow(altura, 2));
-	}
+    public void setPeso(float peso) {
+        if (peso > 0) {
+            this.peso = peso;
+        }
+    }
 
-	public abstract String resultIMC();
+    public float getAltura() {
+        return altura;
+    }
 
-	@Override
-	public String toString() {
-		return String.format("Nome: %s %s\nData de Nascimento: %tF\nPeso: %.2f\nAltura: %.2f\n", getNome(),
-				getSobrenome(), getDataNascimento(), peso, altura);
-	}
+    public void setAltura(float altura) {
+        if (altura > 0) {
+            this.altura = altura;
+        }
+    }
 
-	public float getPeso() {
-		return peso;
-	}
+    public float calculaIMC() {
+        return peso / (altura * altura);
+    }
 
-	public void setPeso(float peso) {
-		this.peso = peso;
-	}
+    @Override
+    public String toString() {
+        return super.toString() + String.format("\nPeso: %.2f\nAltura: %.2f", peso, altura);
+    }
 
-	public float getAltura() {
-		return altura;
-	}
-
-	public void setAltura(float altura) {
-		this.altura = altura;
-	}
-
+    public abstract String resultIMC();
 }
