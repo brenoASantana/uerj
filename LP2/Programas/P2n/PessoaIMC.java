@@ -28,6 +28,7 @@ public abstract class PessoaIMC extends Pessoa {
         }
     }
 
+    
     public float calculaIMC() {
         return peso / (altura * altura);
     }
