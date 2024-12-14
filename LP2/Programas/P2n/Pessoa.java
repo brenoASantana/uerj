@@ -17,11 +17,15 @@ public class Pessoa {
         quantInstancia++;
     }
 
-    public Pessoa(String nome, String sobrenome, int dia, int mes, int ano, long numCPF) {
+    public Pessoa(String nome, String sobrenome, int dia, int mes, int ano, String cpfStr) {
         this.nome = nome;
         this.sobrenome = sobrenome;
         this.dataNascimento = new GregorianCalendar(ano, mes - 1, dia);
-        this.numCPF = numCPF;
+        if (!ValidaCPF.isCPF(cpfStr)) {
+            throw new IllegalArgumentException(
+                    "CPF inválido! Certifique-se de que o CPF inserido é válido e utilize um dos formatos aceitos: 12345678901, 123.456.789-01 ou 123.456.789/01.");
+        }
+        this.numCPF = ValidaCPF.toLong(cpfStr);
         this.idade = calcularIdade();
         quantInstancia++;
     }
@@ -56,7 +60,6 @@ public class Pessoa {
                 nome, sobrenome, dataNascimento, numCPF, idade);
     }
 
-    // Getters e setters
     public String getNome() {
         return nome;
     }

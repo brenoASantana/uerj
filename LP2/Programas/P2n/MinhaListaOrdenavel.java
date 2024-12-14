@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
-import java.util.GregorianCalendar;
 
 public class MinhaListaOrdenavel {
     private ArrayList<PessoaIMC> lista;
@@ -13,8 +12,8 @@ public class MinhaListaOrdenavel {
     public static final int IMC_CRESCENTE = 5;
     public static final int IMC_DECRESCENTE = 6;
     public static final int GENERO = 7;
-    public static final int IDADE_CRESCENTE = 8;
-    public static final int IDADE_DECRESCENTE = 9;
+    public static final int JOVEM_ATE_VELHO = 8;
+    public static final int VELHO_ATE_JOVEM = 9;
     public static final int DATA_NASCIMENTO = 10;
     public static final int CPF = 11;
 
@@ -74,10 +73,10 @@ public class MinhaListaOrdenavel {
             case GENERO:
                 Collections.sort(lista, generoC);
                 break;
-            case IDADE_CRESCENTE:
+            case JOVEM_ATE_VELHO:
                 Collections.sort(lista, idadeC);
                 break;
-            case IDADE_DECRESCENTE:
+            case VELHO_ATE_JOVEM:
                 Collections.sort(lista, idadeCReverso);
                 break;
             case DATA_NASCIMENTO:
@@ -95,7 +94,6 @@ public class MinhaListaOrdenavel {
     public void mostrarLista() {
         for (PessoaIMC p : lista) {
             System.out.println(p);
-            System.out.println("Resultado IMC: " + p.resultIMC());
             System.out.println("------------------------");
         }
     }

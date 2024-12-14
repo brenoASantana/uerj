@@ -1,6 +1,6 @@
 public class Homem extends PessoaIMC {
-    public Homem(String nome, String sobrenome, int dia, int mes, int ano, float peso, float altura) {
-        super(nome, sobrenome, dia, mes, ano, peso, altura);
+    public Homem(String nome, String sobrenome, int dia, int mes, int ano, String cpfStr, float peso, float altura) {
+        super(nome, sobrenome, dia, mes, ano, cpfStr, peso, altura);
     }
 
     @Override
@@ -18,6 +18,6 @@ public class Homem extends PessoaIMC {
     @Override
     public String toString() {
         return super.toString()
-                + String.format("\nGênero: Homem\nIMC: %.2f\nResultado IMC: %.s", calculaIMC(), resultIMC());
+                + String.format("\nGênero: Homem\nIMC: %.2f\nResultado IMC: %s", calculaIMC(), resultIMC());
     }
 }
