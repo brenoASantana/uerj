@@ -1,20 +1,25 @@
-public class Calc // implementar a intercefe CalcIntf
-{
-	
-	public Calc(/*completar se necessário */)
-	{
+package libs.br.uerj.ime.lp2.lp04;
+
+public class Calc implements CalcIntf {
+
+	public Calc(/* completar se necessário */) {
 		// completar se necessário
 	}
-	
-	/* testa se o número de argumentos está ok e joga a exceção confirmada NumArgsEx caso contrário */
-	public void TestaArgs(String[] args) 
-	{
-	      
-		
+
+	/*
+	 * testa se o número de argumentos está ok e joga a exceção confirmada NumArgsEx
+	 * caso contrário
+	 */
+	public void TestaArgs(String[] args) {
+
 	}
 
-    /* joga testa se o número de argumentos está correto e joga NumArgsEx caso contrário, e joga NaoNumEx se algum argumento não for convertível para inteiro */ 
-	{
+	/*
+	 * joga testa se o número de argumentos está correto e joga NumArgsEx caso
+	 * contrário, e joga NaoNumEx se algum argumento não for convertível para
+	 * inteiro
+	 */
+
 	public int soma (String num1, String num2) // completar
 	{
 	    int valor1=0, valor2 =0;
@@ -34,7 +39,6 @@ public class Calc // implementar a intercefe CalcIntf
 	    return valor1 + valor2;
 	}
 
-	
 	/* pode jogar NumArgsEx, NaoNumEx, Div0ex */
 	public double div (String num1, String num2) throws // completar
 	{
@@ -58,6 +62,6 @@ public class Calc // implementar a intercefe CalcIntf
 			
 	    return  resultado;
 	}
-	
+
 	// pode introduzir outros métodos
 }
