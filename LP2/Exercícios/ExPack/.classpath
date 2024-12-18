@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry excluding="appl/|pack/" kind="src" path=""/>
-	<classpathentry kind="src" path="appl"/>
-	<classpathentry kind="src" path="pack"/>
-	<classpathentry kind="output" path="bin"/>
+    <!-- Biblioteca padrão do Java -->
+    <classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+
+    <!-- Diretório 'appl' como fonte -->
+    <classpathentry kind="src" path="appl"/>
+
+    <!-- Diretório 'pack' como fonte -->
+    <classpathentry kind="src" path="pack"/>
+
+    <!-- Diretório de saída para os arquivos compilados -->
+    <classpathentry kind="output" path="bin"/>
 </classpath>
