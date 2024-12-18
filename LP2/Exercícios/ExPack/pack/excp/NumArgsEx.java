@@ -1,4 +1,4 @@
-package com.start.excp;
+package excp;
 
 public class NumArgsEx extends Exception {
     public NumArgsEx(String s) {

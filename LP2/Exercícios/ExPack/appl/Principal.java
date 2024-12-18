@@ -1,33 +1,34 @@
+import libs.br.uerj.ime.lp2.lp04.Calc;
+import excp.*;
+
 public class Principal {
-	public static void main(String[] args) {
-		String nome1, nome2;
-		// cria um objeto Calc para usar ...
-		int soma;
-		double div;
+    public static void main(String[] args) {
+        try {
+            // Verifica o número de argumentos
+            if (args.length != 3) {
+                throw new NumArgsEx("Número incorreto de argumentos.");
+            }
 
-		// testa o número de argumentos
+            // Cria um objeto Calc
+            Calc objeto = new Calc();
 
-		// vê qual a operação
+            String operacao = args[0];
+            String nome1 = args[1];
+            String nome2 = args[2];
 
-		// faz a chamada para executar a operação
-
-		// trata as esceções
-
-		/// completar
-
-		if (args[0].equals("soma")) {
-			nome1 = args[1];
-			nome2 = args[2];
-			soma = objeto.soma(nome1, nome2);
-			System.out.println("Soma = " + soma);
-		} else if (args[0].equals("div")) {
-			nome1 = args[1];
-			nome2 = args[2];
-			div = objeto.div(nome1, nome2);
-			System.out.println("Divisao = " + div);
-		} else
-			// ou completa, ou deixa assim ...
-			System.out.println("Operacao matematica invalida.");
-	}
-
+            if (operacao.equals("soma")) {
+                int soma = objeto.soma(nome1, nome2);
+                System.out.println("Soma = " + soma);
+            } else if (operacao.equals("div")) {
+                double div = objeto.div(nome1, nome2);
+                System.out.println("Divisão = " + div);
+            } else {
+                System.out.println("Operação matemática inválida.");
+            }
+        } catch (NumArgsEx | NaoNumEx | Div0ex e) {
+            System.out.println("Erro: " + e.getMessage());
+        } catch (Exception e) {
+            System.out.println("Erro inesperado: " + e.getMessage());
+        }
+    }
 }

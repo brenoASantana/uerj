@@ -1,67 +1,52 @@
 package libs.br.uerj.ime.lp2.lp04;
 
+import excp.*;
+
 public class Calc implements CalcIntf {
 
-	public Calc(/* completar se necessário */) {
-		// completar se necessário
-	}
+    public Calc() {
+        // Construtor padrão
+    }
 
-	/*
-	 * testa se o número de argumentos está ok e joga a exceção confirmada NumArgsEx
-	 * caso contrário
-	 */
-	public void TestaArgs(String[] args) {
+    @Override
+    public int soma(String num1, String num2) throws NaoNumEx {
+        int valor1, valor2;
 
-	}
+        try {
+            valor1 = Integer.parseInt(num1);
+            valor2 = Integer.parseInt(num2);
+        } catch (NumberFormatException e) {
+            throw new NaoNumEx("Argumento não é um número inteiro.");
+        }
 
-	/*
-	 * joga testa se o número de argumentos está correto e joga NumArgsEx caso
-	 * contrário, e joga NaoNumEx se algum argumento não for convertível para
-	 * inteiro
-	 */
+        return valor1 + valor2;
+    }
 
-	public int soma (String num1, String num2) // completar
-	{
-	    int valor1=0, valor2 =0;
-           
-	   	// completar
-		
-	    try
-	    {
-	    	
-		  valor1 = Integer.parseInt(num1);
-		  valor2 = Integer.parseInt(num2);
-				
-	    }
-	    // completar
-	    	
-			
-	    return valor1 + valor2;
-	}
+    @Override
+    public double div(String num1, String num2) throws NaoNumEx, Div0ex {
+        double valor1, valor2;
 
-	/* pode jogar NumArgsEx, NaoNumEx, Div0ex */
-	public double div (String num1, String num2) throws // completar
-	{
-	    double valor1=0, valor2=0,resultado=0;
+        try {
+            valor1 = Double.parseDouble(num1);
+            valor2 = Double.parseDouble(num2);
+        } catch (NumberFormatException e) {
+            throw new NaoNumEx("Argumento não é um número válido.");
+        }
 
-	   
-	    try
-	    {
-		  valor1 = Double.parseDouble(num1);
-		  valor2 = Double.parseDouble(num2);
-	    }
-	    catch(Exception e)
-	    {
-		  throw new NaoNumEx("Letra passada como argumento: Nao eh possivel converter.");
-	    }
-		 
-	    if (valor2 == 0)
-		// jogar a esceção correta ...
-	    else
-		resultado = valor1/valor2;	
-			
-	    return  resultado;
-	}
+        if (valor2 == 0) {
+            throw new Div0ex("Divisão por zero não é permitida.");
+        }
 
-	// pode introduzir outros métodos
+        return valor1 / valor2;
+    }
+
+    @Override
+    public int sub(int a, int b) {
+        return a - b;
+    }
+
+    @Override
+    public double mult(double a, double b) {
+        return a * b;
+    }
 }

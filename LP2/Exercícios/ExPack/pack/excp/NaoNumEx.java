@@ -1,4 +1,4 @@
-package com.start.excp;
+package excp;
 
 public class NaoNumEx extends Exception {
     public NaoNumEx(String s) {

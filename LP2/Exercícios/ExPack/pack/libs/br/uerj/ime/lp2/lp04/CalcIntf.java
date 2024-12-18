@@ -1,13 +1,13 @@
 package libs.br.uerj.ime.lp2.lp04;
 
-import com.start.excp.Div0ex;
+import excp.*;
 
 public interface CalcIntf {
-	public int soma(int a, int b) throws ErrParEx;
+	int soma(String a, String b) throws NaoNumEx;
 
-	public int sub(int a, int b) throws ErrParEx;
+	int sub(int a, int b);
 
-	public double mult(double a, double b);
+	double mult(double a, double b);
 
-	public double div(double a, double b) throws Div0ex;
+	double div(String a, String b) throws NaoNumEx, Div0ex;
 }
