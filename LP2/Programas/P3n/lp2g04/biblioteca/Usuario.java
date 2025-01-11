@@ -1,4 +1,6 @@
-class Usuario extends Pessoa {
+package biblioteca;
+
+public class Usuario extends Pessoa {
     private String endereco;
     private ArrayList<Emprest> hist;
     private int livrosEmprestados;

@@ -1,5 +1,8 @@
+import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
+
+import biblioteca.Usuario;
 
 public class P3nX {
 
@@ -40,8 +43,10 @@ public class P3nX {
                         scanner.nextLine(); // Limpar o buffer
                         System.out.print("Título do livro: ");
                         String titulo = scanner.nextLine();
+                        System.out.println("Categorias disponíveis: " + Arrays.toString(Categoria.values()));
                         System.out.print("Categoria do livro: ");
-                        String categoria = scanner.nextLine();
+                        String categoriaStr = scanner.nextLine();
+                        Categoria categoria = Categoria.valueOf(categoriaStr.toUpperCase());
                         System.out.print("Quantidade de cópias: ");
                         int quantidade = scanner.nextInt();
 

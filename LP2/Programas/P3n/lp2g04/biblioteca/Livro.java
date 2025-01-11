@@ -1,12 +1,17 @@
+package biblioteca;
+
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
 class Livro {
     private int codigo;
     private String titulo;
-    private String categoria;
+    private Categoria categoria;
     private int quantidade;
     private int emprestados;
     private ArrayList<EmprestPara> hist;
 
-    public Livro(int codigo, String titulo, String categoria, int quantidade) {
+    public Livro(int codigo, String titulo, Categoria categoria, int quantidade) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.categoria = categoria;

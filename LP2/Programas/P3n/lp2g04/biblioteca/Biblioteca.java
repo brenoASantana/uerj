@@ -1,3 +1,7 @@
+package biblioteca;
+
+import java.util.Hashtable;
+
 class Biblioteca {
     private Hashtable<Long, Usuario> usuarios;
     private Hashtable<Integer, Livro> livros;
@@ -36,7 +40,4 @@ class Biblioteca {
         }
         return livro;
     }
-
-    // Outros métodos, incluindo salvar/lé arquivos, relatórios e controle de
-    // históricos.
 }

@@ -1,4 +1,6 @@
-class Emprest {
+package biblioteca;
+
+public class Emprest {
     private GregorianCalendar dataLocacao;
     private GregorianCalendar dataDevolucao;
     private int codigoLivro;
