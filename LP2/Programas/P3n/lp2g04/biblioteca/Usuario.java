@@ -1,4 +1,4 @@
-package biblioteca;
+package lp2g04.biblioteca;
 
 public class Usuario extends Pessoa {
     private String endereco;

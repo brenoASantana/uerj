@@ -2,6 +2,8 @@ import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.Scanner;
 
+import biblioteca.Categoria;
+import biblioteca.Livro;
 import biblioteca.Usuario;
 
 public class P3nX {

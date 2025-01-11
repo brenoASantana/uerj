@@ -1,4 +1,4 @@
-package biblioteca;
+package lp2g04.biblioteca;
 
 class EmprestPara {
     private GregorianCalendar dataLocacao;
