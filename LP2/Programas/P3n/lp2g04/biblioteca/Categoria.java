@@ -1,4 +1,4 @@
-package src.lp2g04.biblioteca;
+package lp2g04.biblioteca;
 
 public enum Categoria {
     FICCAO,

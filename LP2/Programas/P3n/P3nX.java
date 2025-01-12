@@ -1,5 +1,5 @@
 import java.util.Scanner;
-import src.lp2g04.biblioteca.Biblioteca;
+import lp2g04.biblioteca.Biblioteca;
 
 public class P3nX {
 

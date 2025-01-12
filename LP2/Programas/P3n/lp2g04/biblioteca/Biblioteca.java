@@ -1,4 +1,4 @@
-package src.lp2g04.biblioteca;
+package lp2g04.biblioteca;
 
 import java.io.*;
 import java.util.*;
