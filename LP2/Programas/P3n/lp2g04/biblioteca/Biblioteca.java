@@ -29,18 +29,18 @@ public class Biblioteca {
         }
     }
 
-    public void cadastraUsuario(String nome, String cpf) {
+    public void cadastraUsuario(String nome, String cpf, String endereco) {
         if (usuarios.containsKey(cpf)) {
             throw new IllegalArgumentException("Usuário com CPF " + cpf + " já está cadastrado.");
         }
-        usuarios.put(cpf, new Usuario(nome, cpf, "Endereço Padrão"));
+        usuarios.put(cpf, new Usuario(nome, cpf, endereco));
     }
 
     public void cadastraLivro(String titulo, int codigo, int quantidade, String categoria) {
         if (livros.containsKey(codigo)) {
             throw new IllegalArgumentException("Livro com código " + codigo + " já está cadastrado.");
         }
-        livros.put(codigo, new Livro(codigo, titulo, Categoria.valueOf(categoria.toUpperCase()), 1));
+        livros.put(codigo, new Livro(codigo, titulo, Categoria.valueOf(categoria.toUpperCase()), quantidade));
     }
 
     public void emprestaLivro(String cpf, int codigo) {

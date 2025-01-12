@@ -35,7 +35,9 @@ public class P3nX {
                         String nome = scanner.nextLine();
                         System.out.print("CPF: ");
                         String cpf = scanner.nextLine();
-                        biblioteca.cadastraUsuario(nome, cpf);
+                        System.out.print("Endereço: ");
+                        String endereco = scanner.nextLine();
+                        biblioteca.cadastraUsuario(nome, cpf, endereco);
                     }
                     case 2 -> {
                         System.out.print("Título: ");
