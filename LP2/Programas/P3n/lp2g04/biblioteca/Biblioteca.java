@@ -36,13 +36,7 @@ public class Biblioteca {
         usuarios.put(cpf, new Usuario(nome, cpf, "Endereço Padrão"));
     }
 
-    public void cadastraLivro(int codigo2, String titulo, String codigoStr, int quantidade) {
-        int codigo;
-        try {
-            codigo = Integer.parseInt(codigoStr);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException("Código do livro deve ser numérico.");
-        }
+    public void cadastraLivro(String titulo, int codigo, int quantidade) {        
         if (livros.containsKey(codigo)) {
             throw new IllegalArgumentException("Livro com código " + codigo + " já está cadastrado.");
         }
