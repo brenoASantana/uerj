@@ -40,7 +40,7 @@ public class Biblioteca {
         if (livros.containsKey(codigo)) {
             throw new IllegalArgumentException("Livro com código " + codigo + " já está cadastrado.");
         }
-        livros.put(codigo, new Livro(codigo, titulo, Categoria.valueOf(categoria.toUpperCase()), quantidade));
+        livros.put(codigo, new Livro(codigo, titulo, Categoria.isThere(categoria.toUpperCase()), quantidade));
     }
 
     public void emprestaLivro(String cpf, int codigo) {
