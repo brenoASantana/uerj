@@ -41,21 +41,29 @@ public class P3nX {
                         System.out.print("Título: ");
                         String titulo = scanner.nextLine();
                         System.out.print("Código: ");
-                        String codigo = scanner.nextLine();
-                        biblioteca.cadastraLivro(titulo, codigo);
+                        int codigo = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.print("Quantidade: ");
+                        int quantidade = scanner.nextInt();
+                        scanner.nextLine();
+                        System.out.print("Categoria (ex: FICCAO, DRAMA): ");
+                        String categoria = scanner.nextLine();
+                        biblioteca.cadastraLivro(codigo, titulo, categoria, quantidade);
                     }
                     case 3 -> {
                         System.out.print("CPF do Usuário: ");
                         String cpf = scanner.nextLine();
                         System.out.print("Código do Livro: ");
-                        String codigo = scanner.nextLine();
+                        int codigo = scanner.nextInt();
+                        scanner.nextLine();
                         biblioteca.emprestaLivro(cpf, codigo);
                     }
                     case 4 -> {
                         System.out.print("CPF do Usuário: ");
                         String cpf = scanner.nextLine();
                         System.out.print("Código do Livro: ");
-                        String codigo = scanner.nextLine();
+                        int codigo = scanner.nextInt();
+                        scanner.nextLine();
                         biblioteca.devolveLivro(cpf, codigo);
                     }
                     case 5 -> biblioteca.imprimeUsuarios();
