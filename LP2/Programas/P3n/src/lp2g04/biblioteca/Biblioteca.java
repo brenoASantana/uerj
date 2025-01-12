@@ -12,27 +12,23 @@ public class Biblioteca {
         this.livros = new Hashtable<>();
     }
 
-    // Carrega arquivos de usuários e livros
     public void carregaArquivos(String arqUsuarios, String arqLivros) throws IOException, ClassNotFoundException {
         this.usuarios = (Hashtable<String, Usuario>) leArquivo(arqUsuarios);
         this.livros = (Hashtable<Integer, Livro>) leArquivo(arqLivros);
     }
 
-    // Salva tabela em arquivo
     public void salvaArquivo(Hashtable<?, ?> tabela, String nomeArquivo) throws IOException {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(nomeArquivo))) {
             oos.writeObject(tabela);
         }
     }
 
-    // Lê tabela de arquivo
     private Hashtable<?, ?> leArquivo(String nomeArquivo) throws IOException, ClassNotFoundException {
         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(nomeArquivo))) {
             return (Hashtable<?, ?>) ois.readObject();
         }
     }
 
-    // Cadastra um novo usuário
     public void cadastraUsuario(String nome, String cpf) {
         if (usuarios.containsKey(cpf)) {
             throw new IllegalArgumentException("Usuário com CPF " + cpf + " já está cadastrado.");
@@ -40,7 +36,6 @@ public class Biblioteca {
         usuarios.put(cpf, new Usuario(nome, cpf, "Endereço Padrão"));
     }
 
-    // Cadastra um novo livro
     public void cadastraLivro(int codigo2, String titulo, String codigoStr, int quantidade) {
         int codigo;
         try {
@@ -54,7 +49,6 @@ public class Biblioteca {
         livros.put(codigo, new Livro(codigo, titulo, Categoria.NAO_FICCAO, 1));
     }
 
-    // Realiza o empréstimo de um livro
     public void emprestaLivro(String cpf, int codigo) {
         Usuario usuario = usuarios.get(cpf);
         if (usuario == null) {
@@ -74,7 +68,6 @@ public class Biblioteca {
         }
     }
 
-    // Realiza a devolução de um livro
     public void devolveLivro(String cpf, int codigo) {
         Usuario usuario = usuarios.get(cpf);
         if (usuario == null) {
@@ -94,14 +87,12 @@ public class Biblioteca {
         }
     }
 
-    // Imprime a lista de usuários
     public void imprimeUsuarios() {
         usuarios.values().stream()
                 .sorted(Comparator.comparing(Usuario::getNome))
                 .forEach(System.out::println);
     }
 
-    // Imprime a lista de livros
     public void imprimeLivros() {
         livros.values().stream()
                 .sorted(Comparator.comparing(Livro::getCodigo))
