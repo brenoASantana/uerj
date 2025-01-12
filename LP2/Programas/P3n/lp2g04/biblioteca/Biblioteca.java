@@ -36,11 +36,11 @@ public class Biblioteca {
         usuarios.put(cpf, new Usuario(nome, cpf, "Endereço Padrão"));
     }
 
-    public void cadastraLivro(String titulo, int codigo, int quantidade) {        
+    public void cadastraLivro(String titulo, int codigo, int quantidade, String categoria) {
         if (livros.containsKey(codigo)) {
             throw new IllegalArgumentException("Livro com código " + codigo + " já está cadastrado.");
         }
-        livros.put(codigo, new Livro(codigo, titulo, Categoria.NAO_FICCAO, 1));
+        livros.put(codigo, new Livro(codigo, titulo, Categoria.valueOf(categoria.toUpperCase()), 1));
     }
 
     public void emprestaLivro(String cpf, int codigo) {

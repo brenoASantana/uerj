@@ -48,7 +48,7 @@ public class P3nX {
                         scanner.nextLine();
                         System.out.print("Categoria (ex: FICCAO, DRAMA): ");
                         String categoria = scanner.nextLine();
-                        biblioteca.cadastraLivro(codigo, titulo, categoria, quantidade);
+                        biblioteca.cadastraLivro(titulo, codigo, quantidade, categoria);
                     }
                     case 3 -> {
                         System.out.print("CPF do Usuário: ");
