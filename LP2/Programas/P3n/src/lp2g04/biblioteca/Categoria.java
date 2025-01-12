@@ -1,6 +1,6 @@
-package lp2g04.biblioteca;
+package src.lp2g04.biblioteca;
 
-enum Categoria {
+public enum Categoria {
     FICCAO,
     NAO_FICCAO,
     EDUCACAO,

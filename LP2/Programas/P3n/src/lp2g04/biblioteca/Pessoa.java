@@ -1,4 +1,4 @@
-package lp2g04.biblioteca;
+package src.lp2g04.biblioteca;
 
 import java.util.GregorianCalendar;
 
@@ -6,6 +6,7 @@ public class Pessoa {
 	private String nome;
 	private String sobrenome;
 	private GregorianCalendar dataNascimento;
+	private String cpf;
 	private long numCPF;
 	private float peso;
 	private float altura;
@@ -26,6 +27,12 @@ public class Pessoa {
 		this.peso = peso;
 		this.altura = altura;
 		quantInstancia++;
+	}
+
+	// Construtor facilitado para uso em bibliotecas
+	public Pessoa(String nome, String cpf) {
+		this.nome = nome;
+		this.cpf = cpf;
 	}
 
 	public static int numPessoas() {
@@ -95,6 +102,14 @@ public class Pessoa {
 		if (altura > 0) {
 			this.altura = altura;
 		}
+	}
+
+	public String getCpf() {
+		return cpf;
+	}
+
+	public void setCpf(String cpf) {
+		this.cpf = cpf;
 	}
 
 }

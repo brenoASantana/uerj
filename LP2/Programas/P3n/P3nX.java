@@ -1,102 +1,72 @@
-import java.util.Arrays;
-import java.util.GregorianCalendar;
 import java.util.Scanner;
-
-import biblioteca.Categoria;
-import biblioteca.Livro;
-import biblioteca.Usuario;
+import src.lp2g04.biblioteca.Biblioteca;
 
 public class P3nX {
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         Biblioteca biblioteca = new Biblioteca();
+        Scanner scanner = new Scanner(System.in);
 
-        while (true) {
-            System.out.println("\n--- Menu Principal ---");
-            System.out.println("1. Cadastrar Usuário");
-            System.out.println("2. Cadastrar Livro");
-            System.out.println("3. Emprestar Livro");
-            System.out.println("4. Devolver Livro");
-            System.out.println("5. Sair");
-            System.out.print("Escolha uma opção: ");
+        System.out.println("Deseja carregar os cadastros de arquivos? (s/n)");
+        String resposta = scanner.nextLine();
+        if (resposta.equalsIgnoreCase("s")) {
+            try {
+                System.out.print("Nome do arquivo de usuários: ");
+                String arqUsuarios = scanner.nextLine();
+                System.out.print("Nome do arquivo de livros: ");
+                String arqLivros = scanner.nextLine();
+                biblioteca.carregaArquivos(arqUsuarios, arqLivros);
+            } catch (Exception e) {
+                System.out.println("Erro ao carregar arquivos: " + e.getMessage());
+            }
+        }
 
+        boolean executando = true;
+        while (executando) {
+            System.out.println(
+                    "1. Cadastrar Usuário\n2. Cadastrar Livro\n3. Emprestar Livro\n4. Devolver Livro\n5. Imprimir Usuários\n6. Imprimir Livros\n7. Sair");
             int opcao = scanner.nextInt();
-            scanner.nextLine(); // Limpar o buffer
+            scanner.nextLine();
 
             try {
                 switch (opcao) {
-                    case 1:
-                        System.out.print("Nome do usuário: ");
+                    case 1 -> {
+                        System.out.print("Nome Completo: ");
                         String nome = scanner.nextLine();
-                        System.out.print("CPF do usuário: ");
-                        long cpf = scanner.nextLong();
-                        scanner.nextLine(); // Limpar o buffer
-                        System.out.print("Endereço do usuário: ");
-                        String endereco = scanner.nextLine();
-
-                        biblioteca.cadastraUsuario(new Usuario(nome, cpf, endereco));
-                        System.out.println("Usuário cadastrado com sucesso!");
-                        break;
-
-                    case 2:
-                        System.out.print("Código do livro: ");
-                        int codigo = scanner.nextInt();
-                        scanner.nextLine(); // Limpar o buffer
-                        System.out.print("Título do livro: ");
+                        System.out.print("CPF: ");
+                        String cpf = scanner.nextLine();
+                        biblioteca.cadastraUsuario(nome, cpf);
+                    }
+                    case 2 -> {
+                        System.out.print("Título: ");
                         String titulo = scanner.nextLine();
-                        System.out.println("Categorias disponíveis: " + Arrays.toString(Categoria.values()));
-                        System.out.print("Categoria do livro: ");
-                        String categoriaStr = scanner.nextLine();
-                        Categoria categoria = Categoria.valueOf(categoriaStr.toUpperCase());
-                        System.out.print("Quantidade de cópias: ");
-                        int quantidade = scanner.nextInt();
-
-                        biblioteca.cadastraLivro(new Livro(codigo, titulo, categoria, quantidade));
-                        System.out.println("Livro cadastrado com sucesso!");
-                        break;
-
-                    case 3:
-                        System.out.print("CPF do usuário: ");
-                        cpf = scanner.nextLong();
-                        System.out.print("Código do livro: ");
-                        codigo = scanner.nextInt();
-
-                        Usuario usuario = biblioteca.getUsuario(cpf);
-                        Livro livro = biblioteca.getLivro(codigo);
-
-                        livro.empresta();
-                        usuario.addLivroHist(new GregorianCalendar(), codigo);
-
-                        System.out.println("Empréstimo realizado com sucesso!");
-                        break;
-
-                    case 4:
-                        System.out.print("CPF do usuário: ");
-                        cpf = scanner.nextLong();
-                        System.out.print("Código do livro: ");
-                        codigo = scanner.nextInt();
-
-                        usuario = biblioteca.getUsuario(cpf);
-                        livro = biblioteca.getLivro(codigo);
-
-                        livro.devolve();
-                        usuario.setLivroDevolvido(codigo, new GregorianCalendar());
-
-                        System.out.println("Devolução realizada com sucesso!");
-                        break;
-
-                    case 5:
-                        System.out.println("Encerrando o programa...");
-                        scanner.close();
-                        return;
-
-                    default:
-                        System.out.println("Opção inválida. Tente novamente.");
+                        System.out.print("Código: ");
+                        String codigo = scanner.nextLine();
+                        biblioteca.cadastraLivro(titulo, codigo);
+                    }
+                    case 3 -> {
+                        System.out.print("CPF do Usuário: ");
+                        String cpf = scanner.nextLine();
+                        System.out.print("Código do Livro: ");
+                        String codigo = scanner.nextLine();
+                        biblioteca.emprestaLivro(cpf, codigo);
+                    }
+                    case 4 -> {
+                        System.out.print("CPF do Usuário: ");
+                        String cpf = scanner.nextLine();
+                        System.out.print("Código do Livro: ");
+                        String codigo = scanner.nextLine();
+                        biblioteca.devolveLivro(cpf, codigo);
+                    }
+                    case 5 -> biblioteca.imprimeUsuarios();
+                    case 6 -> biblioteca.imprimeLivros();
+                    case 7 -> executando = false;
+                    default -> System.out.println("Opção inválida!");
                 }
             } catch (Exception e) {
                 System.out.println("Erro: " + e.getMessage());
             }
         }
+        scanner.close();
     }
 }

@@ -1,6 +1,8 @@
-package lp2g04.biblioteca;
+package src.lp2g04.biblioteca;
 
-class EmprestPara {
+import java.util.GregorianCalendar;
+
+public class EmprestPara {
     private GregorianCalendar dataLocacao;
     private GregorianCalendar dataDevolucao;
     private long cpfUsuario;
