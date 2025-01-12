@@ -48,6 +48,6 @@ public class Usuario extends Pessoa {
 
 	@Override
 	public String toString() {
-		return super.toString() + ", endereco=" + endereco + ", livrosEmprestados=" + livrosEmprestados;
+		return super.toString() + ", Endereco: " + endereco + ", Livros Emprestados: " + livrosEmprestados;
 	}
 }

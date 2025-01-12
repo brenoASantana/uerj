@@ -31,7 +31,7 @@ public class P3nX {
             try {
                 switch (opcao) {
                     case 1 -> {
-                        System.out.print("Nome Completo: ");
+                        System.out.print("Nome: ");
                         String nome = scanner.nextLine();
                         System.out.print("CPF: ");
                         String cpf = scanner.nextLine();

@@ -7,7 +7,6 @@ public class Pessoa {
 	private String sobrenome;
 	private GregorianCalendar dataNascimento;
 	private String cpf;
-	private long numCPF;
 	private float peso;
 	private float altura;
 	private static int quantInstancia = 0;
@@ -19,11 +18,11 @@ public class Pessoa {
 		quantInstancia++;
 	}
 
-	public Pessoa(String nome, String sobrenome, int dia, int mes, int ano, long numCPF, float peso, float altura) {
+	public Pessoa(String nome, String sobrenome, int dia, int mes, int ano, String cpf, float peso, float altura) {
 		this.nome = nome;
 		this.sobrenome = sobrenome;
 		this.dataNascimento = new GregorianCalendar(ano, mes - 1, dia);
-		this.numCPF = numCPF;
+		this.cpf = cpf;
 		this.peso = peso;
 		this.altura = altura;
 		quantInstancia++;
@@ -40,8 +39,8 @@ public class Pessoa {
 	}
 
 	public String toString() {
-		return String.format("Nome: %s %s, Data de Nascimento: %tF, Peso: %.2f, Altura: %.2f, CPF: %011d", nome,
-				sobrenome, dataNascimento, peso, altura, numCPF);
+		return String.format("Nome: %s, Data de Nascimento: %tF, Peso: %.2f, Altura: %.2f, CPF: %s", nome,
+				dataNascimento, peso, altura, cpf);
 	}
 
 	public String getNome() {
@@ -71,16 +70,6 @@ public class Pessoa {
 	public void setDataNascimento(GregorianCalendar dataNascimento) {
 		if (dataNascimento != null) {
 			this.dataNascimento = dataNascimento;
-		}
-	}
-
-	public long getNumCPF() {
-		return numCPF;
-	}
-
-	public void setNumCPF(long numCPF) {
-		if (numCPF != 0) {
-			this.numCPF = numCPF;
 		}
 	}
 
