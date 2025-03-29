@@ -13,17 +13,46 @@ Para cada caso de teste, escreva um inteiro contendo o número de pares que têm
 */
 
 #include <iostream>
+#include <vector>
+
 using namespace std;
 
 int main()
 {
-    int t, a, b;
+    int t, n, s;
+    int quant = 0;
     cin >> t;
 
     for (int i = 0; i < t; i++)
     {
-        cin >> a >> b;
+        cin >> n >> s;
 
+        vector<int> vet(n);
+
+        for (int j = 0; j < n; j++)
+        {
+            cin >> vet[j];
+        }
+
+        int k = 0;
+        while (k != n - 1)
+        {
+            // Caso chege no final do vetor e não tem mais nenhum item próximo
+            if (k + 1 >= n)
+                break;
+
+            if (vet[k] + vet[k + 1] == s)
+            {
+                k++;
+                quant++;
+                continue;
+            }
+            k++;
+        }
+        continue;
     }
+
+    cout << quant;
+
     return 0;
 }
