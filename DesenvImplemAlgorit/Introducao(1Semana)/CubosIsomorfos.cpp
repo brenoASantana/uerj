@@ -19,13 +19,24 @@ using namespace std;
 
 int main()
 {
-    int t, a, b;
+    int t;
     cin >> t;
 
     for (int i = 0; i < t; i++)
     {
-        cin >> a >> b;
+        char first[6], second[6];
 
+        cin >> first;
+        cin >> second;
+
+        if (1)
+        {
+            cout << 'S' << endl;
+        }
+        else
+        {
+            cout << 'N' << endl;
+        }
     }
     return 0;
 }
