@@ -15,28 +15,88 @@ Para cada caso de teste, escreva S se os cubos forem isomorfos ou N, caso contr√
 */
 
 #include <iostream>
+#include <string>
+#include <set>
 using namespace std;
+
+string rotacionarY(const string &cube)
+{
+    string res = cube;
+    res[1] = cube[2];
+    res[2] = cube[4];
+    res[4] = cube[3];
+    res[3] = cube[1];
+    return res;
+}
+
+string rotacionarX(const string &cube)
+{
+    string res = cube;
+    res[0] = cube[1];
+    res[1] = cube[5];
+    res[5] = cube[4];
+    res[4] = cube[0];
+    return res;
+}
+
+string rotacionarZ(const string &cube)
+{
+    string res = cube;
+    res[0] = cube[3];
+    res[3] = cube[5];
+    res[5] = cube[2];
+    res[2] = cube[0];
+    return res;
+}
 
 int main()
 {
     int t;
     cin >> t;
 
-    for (int i = 0; i < t; i++)
+    while (t--)
     {
-        char first[6], second[6];
+        string cubo1, cubo2;
+        cin >> cubo1;
+        cin >> cubo2;
 
-        cin >> first;
-        cin >> second;
+        bool isIsomorfo = false;
 
-        if (1)
+        set<string> configs;
+
+        for (int i = 0; i < 4; i++)
         {
-            cout << 'S' << endl;
+            string r1 = cubo1;
+
+            for (int a = 0; a < i; a++)
+            {
+                r1 = rotacionarX(r1);
+            }
+            for (int j = 0; j < 4; j++)
+            {
+                string r2 = r1;
+
+                for (int b = 0; b < j; b++)
+                {
+                    r2 = rotacionarY(r2);
+                }
+                for (int k = 0; k < 4; k++)
+                {
+                    string r3 = r2;
+
+                    for (int c = 0; c < k; c++)
+                    {
+                        r3 = rotacionarZ(r3);
+                    }
+                    configs.insert(r3);
+                }
+            }
         }
-        else
+        if (configs.find(cubo2) != configs.end())
         {
-            cout << 'N' << endl;
+            isIsomorfo = true;
         }
+        cout << (isIsomorfo ? 'S' : 'N') << "\n";
     }
     return 0;
 }

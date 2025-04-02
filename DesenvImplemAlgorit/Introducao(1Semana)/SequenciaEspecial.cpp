@@ -19,15 +19,37 @@ Para cada caso de teste, escreva um valor contendo f(k).
 #include <iostream>
 using namespace std;
 
+long long achaF(long long k)
+{
+    if (k == 1)
+        return 1;
+
+    long long somaS = 0;
+    long long atual_c = 1;
+    long long termosGrupo = 1;
+
+    while (true)
+    {
+        long long add = atual_c * termosGrupo;
+        if (somaS + add >= k)
+        {
+            return atual_c;
+        }
+        somaS += add;
+        termosGrupo = atual_c;
+        atual_c++;
+    }
+}
+
 int main()
 {
-    int t, a, b;
+    int t;
     cin >> t;
-
-    for (int i = 0; i < t; i++)
+    while (t--)
     {
-        cin >> a >> b;
-
+        long long k;
+        cin >> k;
+        cout << achaF(k) << endl;
     }
     return 0;
 }
