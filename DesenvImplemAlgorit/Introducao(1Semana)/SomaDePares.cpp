@@ -1,5 +1,6 @@
 /*
 Considere que você tenha um vetor contendo n inteiros distintos, já ordenado.
+É dado um valor s e quer-se saber quantos pares de elementos desse vetor têm a soma igual a s.
 É dado um valor s e quer-se saber quantos pares de elementos desse vetor têm a soma igual a s. 
 
 Entrada
@@ -13,46 +14,52 @@ Para cada caso de teste, escreva um inteiro contendo o número de pares que têm
 */
 
 #include <iostream>
-#include <vector>
-
 using namespace std;
 
 int main()
 {
-    int t, n, s;
-    int quant = 0;
+    int t;
     cin >> t;
 
-    for (int i = 0; i < t; i++)
+    for (int i = 0; i < t; ++i)
     {
+        int n;
+        long s;
         cin >> n >> s;
 
-        vector<int> vet(n);
+        long *vet = new long[n];
 
-        for (int j = 0; j < n; j++)
+        for (int j = 0; j < n; ++j)
         {
             cin >> vet[j];
         }
 
-        int k = 0;
-        while (k != n - 1)
+        int quant = 0;
+        int esq = 0, dir = n - 1;
+
+        while (esq < dir)
         {
-            // Caso chege no final do vetor e não tem mais nenhum item próximo
-            if (k + 1 >= n)
-                break;
-
-            if (vet[k] + vet[k + 1] == s)
+            long soma = vet[esq] + vet[dir];
+            if (soma == s)
             {
-                k++;
                 quant++;
-                continue;
+                esq++;
+                dir--;
             }
-            k++;
+            else if (soma < s)
+            {
+                esq++;
+            }
+            else
+            {
+                dir--;
+            }
         }
-        continue;
-    }
 
-    cout << quant;
+        cout << quant << '\n';
+
+        delete[] vet;
+    }
 
     return 0;
 }
