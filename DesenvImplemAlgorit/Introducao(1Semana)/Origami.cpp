@@ -23,7 +23,12 @@ int main()
     for (int i = 0; i < t; i++)
     {
         cin >> a >> b;
-
+        int caso1 = min(a / 2, b / 2);
+        int caso2 = min(a / 4, b);
+        int caso3 = min(a, b / 4);
+        int res = max(caso1, max(caso2, caso3));
+        cout << res << endl;
     }
+
     return 0;
 }
