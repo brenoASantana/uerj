@@ -14,40 +14,35 @@ Saída
 A saída deve ser um caractere para cada entrada, com o valor 'S' se haverá o segundo turno, e 'N' caso não houver.
 O segundo turno ocorre se nenhum candidato obtiver a maioria dos votos, isto é, mais que n/2 votos.
 */
+
 #include <iostream>
+#include <unordered_map>
 using namespace std;
 
 int main()
 {
-    long t, quantCand;
-    long maior, quant = 0;
-
+    int t;
     cin >> t;
     while (t--)
     {
-        cin >> quantCand;
-
-        long *votos = new long[quantCand];
-
-        for (int i = 0; i < quantCand; i++)
+        int n;
+        cin >> n;
+        unordered_map<long, int> freq;
+        for (int i = 0; i < n; i++)
         {
-            cin >> votos[i];
+            long voto;
+            cin >> voto; 
+            freq[voto]++;
         }
-
-        for (int i = 0; i < quantCand; i++)
+        int max_votos = 0;
+        for (auto &par : freq)
         {
-            cout << votos[i] << endl;
-            quant += votos[i];
-            if (votos[i] >= maior)
+            if (par.second > max_votos)
             {
-                maior = &votos[i];
+                max_votos = par.second;
             }
         }
-        cout << maior << endl;
-        cout << quant << endl;
-        cout << quantCand << endl;
-
-        if (maior >= (quant / 2))
+        if (max_votos > n / 2)
         {
             cout << 'N' << endl;
         }
@@ -55,9 +50,6 @@ int main()
         {
             cout << 'S' << endl;
         }
-
-        delete[] votos;
     }
-
-        return 0;
+    return 0;
 }
