@@ -18,26 +18,30 @@ um conjunto de n elementos. Pode-se assumir que todos os números de combinaçõ
 #include <iostream>
 using namespace std;
 
-long long combination(int n, int p) {
+long long combinacoes(int n, int p)
+{
     if (p > n - p)
         p = n - p;
-    long long result = 1;
-    for (int i = 1; i <= p; i++) {
-        result *= (n - p + i);
-        result /= i;
+    long long res = 1;
+    for (int i = 1; i <= p; i++)
+    {
+        res *= (n - p + i);
+        res /= i;
     }
-    return result;
+    return res;
 }
 
-int main() {
+int main()
+{
     int t, n, p;
     cin >> t;
-    while (t--) {
+    while (t--)
+    {
         cin >> n >> p;
         if (p == 0 || p == n)
             cout << 1 << endl;
         else
-            cout << combination(n, p) << endl;
+            cout << combinacoes(n, p) << endl;
     }
     return 0;
 }

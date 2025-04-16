@@ -32,15 +32,11 @@ int main()
     {
         cin >> n >> m;
         if (n == 0 || m == 0)
-        {
             cout << 0 << endl;
-        }
+
         else
-        {
-            long long a = (long long)n * (n + 1) / 2;
-            long long b = (long long)m * (m + 1) / 2;
-            cout << a * b << endl;
-        }
+
+            cout << ((long long)n * (n + 1) / 2) * ((long long)m * (m + 1) / 2) << endl;
     }
 
     return 0;
