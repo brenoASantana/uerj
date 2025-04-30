@@ -34,102 +34,58 @@ Saída
 Para cada caso de teste, escreva em uma linha o inteiro que representa o comprimento do maior trajeto de descida.
 */
 
-#include <iostream>
-#include <vector>
-#include <queue>
+#include <bits/stdc++.h>
 using namespace std;
 
-struct Node
+int n, m;
+vector<vector<int>> h;
+vector<vector<int>> dp;
+int dr[4] = {1, -1, 0, 0};
+int dc[4] = {0, 0, 1, -1};
+
+// Retorna o maior comprimento de descida a partir de (r,c)
+int dfs(int r, int c)
 {
-    int v, e, d;
-};
+    if (dp[r][c] != 0)
+        return dp[r][c];
+    int best = 1; // já conta a própria célula
+    for (int d = 0; d < 4; ++d)
+    {
+        int nr = r + dr[d], nc = c + dc[d];
+        if (nr >= 0 && nr < n && nc >= 0 && nc < m && h[nr][nc] < h[r][c])
+        {
+            best = max(best, 1 + dfs(nr, nc));
+        }
+    }
+    return dp[r][c] = best;
+}
 
 int main()
 {
-    ios_base::sync_with_stdio(false);
+    ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int t;
-    cin >> t;
-
-    while (t--)
+    int T;
+    cin >> T;
+    while (T--)
     {
-        int n;
-        cin >> n;
+        cin >> n >> m;
+        h.assign(n, vector<int>(m));
+        for (int i = 0; i < n; ++i)
+            for (int j = 0; j < m; ++j)
+                cin >> h[i][j];
 
-        vector<Node> nodes(n + 1);
-        vector<vector<int>> parents(n + 1);
-        vector<int> count(n + 1, 0);
-        vector<long long> sum(n + 1, 0);
-
-        for (int j = 0; j < n; ++j)
+        dp.assign(n, vector<int>(m, 0));
+        int answer = 0;
+        for (int i = 0; i < n; ++i)
         {
-            int i, v, e, d;
-            cin >> i >> v >> e >> d;
-            nodes[i] = {v, e, d};
-
-            if (e != 0)
+            for (int j = 0; j < m; ++j)
             {
-                parents[e].push_back(i);
-                count[i]++;
-            }
-            if (d != 0)
-            {
-                parents[d].push_back(i);
-                count[i]++;
+                answer = max(answer, dfs(i, j));
             }
         }
 
-        queue<int> q;
-        for (int i = 1; i <= n; ++i)
-        {
-            if (count[i] == 0)
-            {
-                q.push(i);
-            }
-        }
-
-        while (!q.empty())
-        {
-            int current = q.front();
-            q.pop();
-
-            sum[current] = nodes[current].v;
-            if (nodes[current].e != 0)
-            {
-                sum[current] += sum[nodes[current].e];
-            }
-            if (nodes[current].d != 0)
-            {
-                sum[current] += sum[nodes[current].d];
-            }
-
-            for (int parent : parents[current])
-            {
-                if (--count[parent] == 0)
-                {
-                    q.push(parent);
-                }
-            }
-        }
-
-        long long max_sum = -1e18;
-        int result_id = n + 1;
-        for (int i = 1; i <= n; ++i)
-        {
-            if (sum[i] > max_sum)
-            {
-                max_sum = sum[i];
-                result_id = i;
-            }
-            else if (sum[i] == max_sum && i < result_id)
-            {
-                result_id = i;
-            }
-        }
-
-        cout << result_id << '\n';
+        cout << answer << "\n";
     }
-
     return 0;
 }

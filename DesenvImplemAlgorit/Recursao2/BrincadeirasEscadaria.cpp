@@ -23,24 +23,51 @@ Saída
 Para cada caso de teste, escreva em uma linha o inteiro que representa a maior recompensa possível de se obter em uma subida.
 */
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+
+const long long INF = LLONG_MIN / 2;
+vector<int> x;
+vector<long long> memo;
+int k;
+
+long long resolve(int i)
+{
+    if (i == 1)
+        return x[1];
+    if (memo[i] != INF)
+        return memo[i];
+
+    long long melhor = LLONG_MIN;
+    // tenta vir de qualquer degrau i–j, j=1..k
+    for (int j = 1; j <= k; j++)
+    {
+        if (i - j >= 1)
+        {
+            melhor = max(melhor, resolve(i - j));
+        }
+    }
+    return memo[i] = x[i] + melhor;
+}
 
 int main()
 {
-    int t, n, m;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
     cin >> t;
-
-    for (int i = 0; i < t; i++)
+    while (t--)
     {
-        cin >> n >> m;
-        if (n == 0 || m == 0)
-            cout << 0 << endl;
+        int n;
+        cin >> n >> k;
+        x.assign(n + 1, 0);
+        for (int i = 1; i <= n; i++)
+            cin >> x[i];
 
-        else
+        memo.assign(n + 1, INF);
 
-            cout << ((long long)n * (n + 1) / 2) * ((long long)m * (m + 1) / 2) << endl;
+        cout << resolve(n) << "\n";
     }
-
     return 0;
 }

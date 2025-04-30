@@ -13,61 +13,38 @@ Saída
 Para cada caso de teste, escreva em uma linha com a quantidade de números com exatamente k algarismos podem ser representados com no máximo n palitos.
 */
 
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-// Função que realiza a mescla contando as inversões
-long long merge_and_count(vector<int> &arr, int l, int m, int r)
+// custos de palitos para cada dígito de 0 a 9:
+static const int cost[10] = {6, 2, 5, 5, 4, 5, 6, 3, 7, 6};
+
+using ll = long long;
+int K;
+vector<vector<ll>> dp;
+
+// Função recursiva top-down:
+// pos = posição atual (1..K), rem = palitos restantes (0..7*K)
+ll go(int pos, int rem)
 {
-    int n1 = m - l + 1;
-    int n2 = r - m;
-
-    vector<int> left(n1), right(n2);
-    for (int i = 0; i < n1; i++)
-        left[i] = arr[l + i];
-    for (int j = 0; j < n2; j++)
-        right[j] = arr[m + 1 + j];
-
-    int i = 0, j = 0, k = l;
-    long long inv_count = 0;
-
-    // Mescla os vetores e conta as inversões:
-    while (i < n1 && j < n2)
+    // caso base: preencheu todas as posições
+    if (pos == K + 1)
+        return 1;
+    ll &ans = dp[pos][rem];
+    if (ans != -1)
+        return ans;
+    ans = 0;
+    // intervalo de dígitos válidos
+    int start = (pos == 1 ? 1 : 0);
+    for (int d = start; d <= 9; ++d)
     {
-        if (left[i] <= right[j])
+        int c = cost[d];
+        if (c <= rem)
         {
-            arr[k++] = left[i++];
-        }
-        else
-        {
-            arr[k++] = right[j++];
-            // Se left[i] > right[j], todos os elementos restantes em left[i...n1-1] são maiores que right[j]
-            inv_count += (n1 - i);
+            ans += go(pos + 1, rem - c);
         }
     }
-
-    // Copia os elementos restantes (caso haja)
-    while (i < n1)
-        arr[k++] = left[i++];
-    while (j < n2)
-        arr[k++] = right[j++];
-
-    return inv_count;
-}
-
-// Função merge sort modificada que utiliza recursão para contar inversões
-long long mergeSort_and_count(vector<int> &arr, int l, int r)
-{
-    long long inv_count = 0;
-    if (l < r)
-    {
-        int m = l + (r - l) / 2;
-        inv_count += mergeSort_and_count(arr, l, m);     // Chamada recursiva para a metade esquerda
-        inv_count += mergeSort_and_count(arr, m + 1, r); // Chamada recursiva para a metade direita
-        inv_count += merge_and_count(arr, l, m, r);      // Mescla e contagem das inversões
-    }
-    return inv_count;
+    return ans;
 }
 
 int main()
@@ -75,21 +52,22 @@ int main()
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int t;
-    cin >> t;
-
-    while (t--)
+    int T;
+    cin >> T;
+    while (T--)
     {
-        int n;
-        cin >> n;
+        long long n;
+        cin >> n >> K;
 
-        vector<int> arr(n);
-        for (int i = 0; i < n; i++)
-            cin >> arr[i];
+        // limite real de palitos: não faz sentido ter mais que 7*K
+        int maxSticks = 7 * K;
+        int rem = (n > maxSticks ? maxSticks : int(n));
 
-        long long inversions = mergeSort_and_count(arr, 0, n - 1);
-        cout << inversions << "\n";
+        // inicializa dp com -1
+        dp.assign(K + 2, vector<ll>(rem + 1, -1));
+
+        // computa resposta
+        cout << go(1, rem) << "\n";
     }
-
     return 0;
 }

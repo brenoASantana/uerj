@@ -20,91 +20,95 @@ Para cada caso de teste, escreva em uma linha o inteiro que representa o resulta
 Assuma que não haverá divisão por 0 e que os valores de todas as expressões calculadas são no máximo 10^9.
 */
 
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include <bits/stdc++.h>
 using namespace std;
+
+string s;
+int idx;
+
+void pulaEspacos()
+{
+    while (idx < (int)s.size() && isspace(s[idx]))
+        idx++;
+}
+
+long long parseNumero()
+{
+    pulaEspacos();
+    int sign = 1;
+    if (s[idx] == '+' || s[idx] == '-')
+    {
+        if (s[idx] == '-')
+            sign = -1;
+        idx++;
+    }
+    long long num = 0;
+    while (idx < (int)s.size() && isdigit(s[idx]))
+    {
+        num = num * 10 + (s[idx] - '0');
+        idx++;
+    }
+    return sign * num;
+}
+
+// Lê e avalia EXPR:
+//  EXPR = number
+//       | '(' EXPR ')' op '(' EXPR ')'
+long long parseExpr()
+{
+    pulaEspacos();
+    if (s[idx] != '(')
+    {
+        // é um número isolado
+        return parseNumero();
+    }
+    // encontrou '(', então é (EXP1) op (EXP2)
+    idx++; // consome '('
+    long long left = parseExpr();
+    pulaEspacos();
+    if (s[idx] == ')')
+        idx++;
+    pulaEspacos();
+    char op = s[idx++]; // +, -, x ou /
+    pulaEspacos();
+    if (s[idx] == '(')
+        idx++;
+    long long right = parseExpr();
+    pulaEspacos();
+    if (s[idx] == ')')
+        idx++;
+    // aplica operação
+    switch (op)
+    {
+    case '+':
+        return left + right;
+    case '-':
+        return left - right;
+    case 'x': // ou '*'
+    case '*':
+        return left * right;
+    case '/':
+        return left / right;
+    }
+    return 0; // nunca chega aqui
+}
 
 int main()
 {
     ios::sync_with_stdio(false);
     cin.tie(nullptr);
 
-    int t;
-    cin >> t;
+    int T;
+    cin >> T;
+    string line;
+    getline(cin, line); // consome o \n após T
 
-    while (t--)
+    while (T--)
     {
-        int L, A;
-        cin >> L >> A;
-
-        int n;
-        cin >> n;
-
-        vector<pair<int, int>> trees(n);
-        for (int i = 0; i < n; i++)
-        {
-            cin >> trees[i].first >> trees[i].second;
-        }
-
-        // Conjunto de pontos candidatos para as coordenadas x e y
-        vector<int> xs, ys;
-        xs.push_back(0);
-        xs.push_back(L);
-        ys.push_back(0);
-        ys.push_back(A);
-
-        for (int i = 0; i < n; i++)
-        {
-            xs.push_back(trees[i].first);
-            ys.push_back(trees[i].second);
-        }
-
-        // Remover duplicatas e ordenar
-        sort(xs.begin(), xs.end());
-        xs.erase(unique(xs.begin(), xs.end()), xs.end());
-        sort(ys.begin(), ys.end());
-        ys.erase(unique(ys.begin(), ys.end()), ys.end());
-
-        long long maxArea = 0;
-
-        // Itera sobre todos os retângulos candidatos
-        for (int i = 0; i < (int)xs.size(); i++)
-        {
-            for (int j = i + 1; j < (int)xs.size(); j++)
-            {
-                for (int k = 0; k < (int)ys.size(); k++)
-                {
-                    for (int l = k + 1; l < (int)ys.size(); l++)
-                    {
-                        int x_left = xs[i], x_right = xs[j];
-                        int y_bottom = ys[k], y_top = ys[l];
-
-                        // Verifica se existe árvore estritamente dentro do retângulo
-                        bool valid = true;
-                        for (int p = 0; p < n; p++)
-                        {
-                            int tx = trees[p].first, ty = trees[p].second;
-                            if (tx > x_left && tx < x_right && ty > y_bottom && ty < y_top)
-                            {
-                                valid = false;
-                                break;
-                            }
-                        }
-
-                        if (valid)
-                        {
-                            long long area = (long long)(x_right - x_left) * (y_top - y_bottom);
-                            if (area > maxArea)
-                                maxArea = area;
-                        }
-                    }
-                }
-            }
-        }
-
-        cout << maxArea << "\n";
+        getline(cin, s);
+        idx = 0;
+        long long ans = parseExpr();
+        cout << ans << "\n";
     }
-
     return 0;
 }

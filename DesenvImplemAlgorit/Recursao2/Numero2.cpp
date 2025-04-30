@@ -14,33 +14,56 @@ Saída
 Para cada caso de teste, escreva em uma linha o inteiro que representa a quantidade de algarismos 2 nos números x+1, x+2, ..., y escritos em representação decimal.
 */
 
-#include <iostream>
+#include <bits/stdc++.h>
 using namespace std;
+using unsigned64 = unsigned long long;
 
-long long combinacoes(int n, int p)
+// Conta quantos dígitos '2' há em todos os números de 0 até n
+unsigned64 count2sUpTo(unsigned long long n)
 {
-    if (p > n - p)
-        p = n - p;
-    long long res = 1;
-    for (int i = 1; i <= p; i++)
+    if (n == (unsigned64)-1)
+        return 0; // caso n < 0
+    unsigned64 count = 0;
+    unsigned long long factor = 1;
+    while (factor <= n)
     {
-        res *= (n - p + i);
-        res /= i;
+        unsigned long long higher = n / (factor * 10);
+        unsigned long long current = (n / factor) % 10;
+        unsigned long long lower = n % factor;
+        // caso current < 2
+        if (current < 2)
+        {
+            count += higher * factor;
+        }
+        // caso current == 2
+        else if (current == 2)
+        {
+            count += higher * factor + lower + 1;
+        }
+        // caso current > 2
+        else
+        {
+            count += (higher + 1) * factor;
+        }
+        factor *= 10;
     }
-    return res;
+    return count;
 }
 
 int main()
 {
-    int t, n, p;
+    ios::sync_with_stdio(false);
+    cin.tie(nullptr);
+
+    int t;
     cin >> t;
     while (t--)
     {
-        cin >> n >> p;
-        if (p == 0 || p == n)
-            cout << 1 << endl;
-        else
-            cout << combinacoes(n, p) << endl;
+        unsigned long long x, y;
+        cin >> x >> y;
+        // número de '2's em (x+1..y) = C(y) - C(x)
+        unsigned64 result = count2sUpTo(y) - count2sUpTo(x);
+        cout << result << "\n";
     }
     return 0;
 }
