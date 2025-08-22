@@ -1,74 +1,63 @@
 import time
 
-# 1 - Implementação do MergeSort
-def merge_sort(arr):
-    if len(arr) > 1:
-        mid = len(arr) // 2
-        esquerda = arr[:mid]
-        direita = arr[mid:]
+# Merge: combina duas metades já ordenadas
+def merge(lista, inicio, meio, fim):
+    tamanho_esq = meio - inicio + 1
+    tamanho_dir = fim - meio
 
-        merge_sort(esquerda)
-        merge_sort(direita)
+    esquerda = lista[inicio:meio+1] + [float("inf")]
+    direita = lista[meio+1:fim+1] + [float("inf")]
 
-        i = j = k = 0
-
-        # Combina as duas metades
-        while i < len(esquerda) and j < len(direita):
-            if esquerda[i] < direita[j]:
-                arr[k] = esquerda[i]
-                i += 1
-            else:
-                arr[k] = direita[j]
-                j += 1
-            k += 1
-
-        # Copia os elementos restantes
-        while i < len(esquerda):
-            arr[k] = esquerda[i]
+    i = j = 0
+    for k in range(inicio, fim + 1):
+        if esquerda[i] <= direita[j]:
+            lista[k] = esquerda[i]
             i += 1
-            k += 1
-
-        while j < len(direita):
-            arr[k] = direita[j]
+        else:
+            lista[k] = direita[j]
             j += 1
-            k += 1
 
 
-# 2 - Gerador de números pseudo-aleatórios (Linear Congruential Generator)
-def lcg(seed, n):
-    a = 1664525      # multiplicador
-    c = 1013904223   # incremento
-    m = 2**32        # módulo
+# MergeSort recursivo: divide, ordena e combina
+def merge_sort(lista, inicio, fim):
+    if inicio < fim:
+        meio = (inicio + fim) // 2
+        merge_sort(lista, inicio, meio)
+        merge_sort(lista, meio + 1, fim)
+        merge(lista, inicio, meio, fim)
+
+
+# Gerador de números pseudo-aleatórios (Linear Congruential Generator)
+def gerar_numeros(seed, quantidade):
+    a = 1664525
+    c = 1013904223
+    m = 2**32
     valores = []
     x = seed
-    for _ in range(n):
+    for _ in range(quantidade):
         x = (a * x + c) % m
-        valores.append(x % 100000)  # limitar os valores
+        valores.append(x % 100000)
     return valores
 
 
-# 3 - Gerar três vetores (100, 1000, 10000 elementos)
+# Geração dos vetores
 vetores = {
-    "100": lcg(seed=int(time.time()), n=100),
-    "1000": lcg(seed=int(time.time()), n=1000),
-    "10000": lcg(seed=int(time.time()), n=10000),
+    "100": gerar_numeros(seed=int(time.time()), quantidade=100),
+    "1000": gerar_numeros(seed=int(time.time()), quantidade=1000),
+    "10000": gerar_numeros(seed=int(time.time()), quantidade=10000),
 }
 
-# 4 - Armazenar em arquivos .txt
+# Salva vetores originais
 for tamanho, vetor in vetores.items():
     with open(f"vetor_{tamanho}.txt", "w") as f:
         f.write(" ".join(map(str, vetor)))
 
-
-# 5 - Ler, ordenar com MergeSort e salvar em novos arquivos
+# Lê, ordena e salva
 for tamanho in vetores.keys():
-    # Lê o vetor
     with open(f"vetor_{tamanho}.txt", "r") as f:
         vetor = list(map(int, f.read().split()))
 
-    # Ordena
-    merge_sort(vetor)
+    merge_sort(vetor, 0, len(vetor) - 1)
 
-    # Salva vetor ordenado
     with open(f"vetor_{tamanho}_ordenado.txt", "w") as f:
         f.write(" ".join(map(str, vetor)))
