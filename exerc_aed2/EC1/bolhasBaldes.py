@@ -1,6 +1,3 @@
-# EC1 - Bolhas e Baldes
-# Solução do problema 1088 do Beecrowd
-
 # Função para contar inversões usando o método Merge Sort
 def contar_inversoes(vetor):
     if len(vetor) <= 1:
@@ -26,19 +23,24 @@ def contar_inversoes(vetor):
 # Programa principal
 while True:
     try:
-        entrada = input()
+        linha = input().strip()
+        if not linha:  # Lida com possíveis linhas vazias no final
+            continue
+        dados = list(map(int, linha.split()))
+        
+        tamanho = dados[0]
+        if tamanho == 0:
+            break
+        
+        numeros = dados[1:]
+        
+        _, total_inversoes = contar_inversoes(numeros)
+        
+        # Se o número de inversões for par, Carlos vence; se for ímpar, Marcelo vence
+        if total_inversoes % 2 == 0:
+            print("Carlos")
+        else:
+            print("Marcelo")
+            
     except EOFError:
         break
-    if entrada.strip() == '0':
-        break
-    dados = list(map(int, entrada.strip().split()))
-    tamanho = dados[0]
-    numeros = dados[1:1+tamanho]
-    if len(numeros) != tamanho:
-        continue  # ignora entradas inválidas
-    _, total_inversoes = contar_inversoes(numeros)
-    # Se o número de inversões for par, Carlos vence; se for ímpar, Marcelo vence
-    if total_inversoes % 2 == 0:
-        print("Carlos")
-    else:
-        print("Marcelo")
