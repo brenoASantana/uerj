@@ -105,7 +105,8 @@ def main():
         # Formata a saída conforme enunciado
         out_lines.append(f"{max_soma} {min_soma}")
 
-    sys.stdout.write("\n".join(out_lines))
+    # Garante quebra de linha no final para evitar Presentation Error
+    sys.stdout.write("\n".join(out_lines) + ("\n" if out_lines else ""))
 
 
 if __name__ == "__main__":

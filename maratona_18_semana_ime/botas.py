@@ -81,7 +81,8 @@ def main():
         # Calcula a quantidade de pares e guarda para impressão
         out_lines.append(str(contar_pares_de_botas(pes)))
 
-    sys.stdout.write("\n".join(out_lines))
+    # Garante quebra de linha ao final (evita Presentation Error em alguns juízes)
+    sys.stdout.write("\n".join(out_lines) + ("\n" if out_lines else ""))
 
 
 if __name__ == "__main__":

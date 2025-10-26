@@ -82,7 +82,8 @@ def main() -> None:
             # Ordena e imprime numa única linha, separados por espaço
             out_lines.append(" ".join(map(str, sorted(regulares))))
 
-    sys.stdout.write("\n".join(out_lines))
+    # Garante quebra de linha ao final para evitar Presentation Error no juiz
+    sys.stdout.write("\n".join(out_lines) + ("\n" if out_lines else ""))
 
 
 if __name__ == "__main__":

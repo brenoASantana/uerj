@@ -78,8 +78,9 @@ def main() -> None:
         # Armazena a resposta como string para imprimir depois
         out_lines.append(str(area))
 
-    # Imprime uma resposta por linha, conforme especificação do problema
-    sys.stdout.write("\n".join(out_lines))
+    # Imprime uma resposta por linha, conforme especificação do problema.
+    # Garantimos uma nova linha final para evitar presentation errors em alguns judges.
+    sys.stdout.write("\n".join(out_lines) + "\n")
 
 
 if __name__ == "__main__":
